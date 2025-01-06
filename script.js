@@ -21,7 +21,7 @@ const closeModal = () => {
       singleModal.classList.remove("active");
     }
     overlay.classList.remove("overlayactive")
-    modalWrapper.classList.toggle('flipped');
+    modalWrapper.classList.remove('flipped');
     
 
     // document.modal.classList.remove('modal-active');

@@ -756,7 +756,7 @@ body{
     top: 50%;
     translate: -50% -50%;
     scale: 0;
-    transition: 0.2s ease-in-out;
+    transition: 1.2s ease-in-out;
     transform-origin: center;
     transform-style: preserve-3d;
     
