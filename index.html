@@ -19,6 +19,7 @@
     />
     <link rel="stylesheet" href="./style.css" />
     <link rel="icon" type="image/png" href="./image/logo.png" />
+    <script type="module" src="./authentication/auth.js" defer></script>
   </head>
   <body>
 
@@ -538,14 +539,14 @@
                 <p>Access your dashboard and explore new features!</p>
               </div>
               <div class="login-input">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
+                <input type="email" placeholder="Email" id="login-email">
+                <input type="password" placeholder="Password" id="login-password">
                 <div class="news-policy" id="login-register">
                   Don't have an account?&nbsp;
                   <a class="policy-link flip-to-register flip-link">Register Here</a>
                 </div>
               </div>
-              <button class="login-modal-button" onclick="openModal()">LOGIN</button>
+              <button class="login-modal-button" onclick="openModal()" id="login-button">LOGIN</button>
             </div>
           </div>
 
@@ -563,22 +564,22 @@
                 <p>Create an account to unlock amazing features!</p>
               </div>
               <div class="login-input">
-                <input type="text" placeholder="Full Name">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <input type="password" placeholder="Confirm password">
+                <input type="text" placeholder="User Name" id="registration-username">
+                <input type="email" placeholder="Email" id="registration-email">
+                <input type="password" placeholder="Password" id="registration-password">
                 <div class="news-policy" id="login-register">
                   Already have an account?&nbsp;
                   <a class="policy-link flip-to-login flip-link">Login Here</a>
                 </div>
               </div>
-              <button class="login-modal-button">REGISTER</button>
+              <button class="login-modal-button" id="register-button">REGISTER</button>
             </div>
           </div>
 
         </div>
       </div>
       
+    
     <script src="script.js"></script>
   </body>
 </html>

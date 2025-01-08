@@ -756,7 +756,7 @@ body{
     top: 50%;
     translate: -50% -50%;
     scale: 0;
-    transition: 1.2s ease-in-out;
+    transition: 0.2s ease-in-out;
     transform-origin: center;
     transform-style: preserve-3d;
     
@@ -932,7 +932,7 @@ body{
     height: auto;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 1s ease-in-out;
+    transition: transform 0.4555s ease-in-out;
     backdrop-filter: blur(10px);
     perspective: 1000px;
   }
