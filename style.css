@@ -25,9 +25,11 @@ body{
     text-align: center;
     /* background-color: var(--background-color); */
     /* background-color: rgb(0, 0, 44); */
-    background-color: #310e68;
-    background-image: linear-gradient(316deg, #310e68 0%, #5f0f40 74%);
-    background-repeat: no-repeat; /* Prevents gradient from repeating */
+    /* background-color: #310e68;
+    background-image: linear-gradient(316deg, #310e68 0%, #5f0f40 74%); */
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(75,0,105,1) 35%, rgba(176,0,83,1) 70%);
+    /* background-repeat: no-repeat; Prevents gradient from repeating */
     background-size: cover;
     padding: 0.2rem;
     overflow-x: hidden;
@@ -43,6 +45,9 @@ body{
     /* border: 1px solid black; */
     
 
+}
+#homepage{
+    color: var(--link-color);
 }
 .logo img{
     height: 2.1rem;
