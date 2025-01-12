@@ -112,7 +112,7 @@ nextButton.addEventListener("click", async () => {
 
     // Redirect to the appropriate dashboard
     if (role === "Student") {
-      window.location.href = "../dashboard/student-dashboard/index.html";
+      window.location.href = "./details/details.html";
     } else if (role === "Recruiter") {
       window.location.href = "../dashboard/recruiter-dashboard/index.html";
     }

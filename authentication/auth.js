@@ -119,6 +119,31 @@ login.addEventListener("click", function (event) {
         const userData = userDocSnap.data();
         const userRole = userData.role;
 
+        // Check for role first
+        if (!userRole) {
+          alert("Role not found. Please select your role first.");
+          window.location.href = "./selectrole/index.html"; // Redirect to selectrole page
+          return;
+        }
+
+        // If role exists, check for additional details
+        const bio = userData.bio;
+        const dob = userData.dateOfBirth;
+        const gender = userData.gender;
+        const interestedFields = userData.interestedFields;
+
+        if (
+          !bio ||
+          !dob ||
+          !gender ||
+          !interestedFields ||
+          interestedFields.length === 0
+        ) {
+          alert("Additional details are incomplete. Please fill them in.");
+          window.location.href = "./selectrole/details/details.html"; // Redirect to additional details page
+          return;
+        }
+
         // Redirect based on role
         if (userRole == "Student") {
           window.location.href = "./dashboard/student-dashboard/index.html";

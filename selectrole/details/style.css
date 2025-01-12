@@ -8,6 +8,7 @@
     text-align: center;
     margin: 1.5rem;
     width: 450px;
+    height: 100%;
 
 }
 
@@ -130,9 +131,8 @@ input[type="radio"]:checked + label {
 }
 .interested-fields-container{
     position: relative;
-    max-width: 320px;
+    /* max-width: 320px; */
     width: 100%;
-    /* width: 100%; */
     display: flex;
     justify-content: center;
     align-items: start;
@@ -146,7 +146,7 @@ input[type="radio"]:checked + label {
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    border-radius: 8px;
+    border-radius: 2px;
     cursor: pointer;
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -178,7 +178,7 @@ input[type="radio"]:checked + label {
     overflow-y: scroll;
     scroll-behavior: smooth;
     /* margin-top: 15px; */
-    border-radius: 8px;
+    border-radius: 2px;
     padding: 16px;
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
