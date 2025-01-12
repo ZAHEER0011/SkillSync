@@ -82,7 +82,8 @@ document.getElementById("next-button").addEventListener("click", async (e) => {
   console.log(bio);
   const dob = document.getElementById("dateofbirth").value; // Date of Birth
   console.log(dob);
-  const gender = document.querySelector("input[name='gender']:checked").value; // Male/Female
+  const genderInput = document.querySelector("input[name='gender']:checked");
+  const gender = genderInput ? genderInput.value : null;
   console.log(gender);
   const interestedFields = getSelectedFields(); // Array of selected interested fields
   console.log(interestedFields);
@@ -93,7 +94,7 @@ document.getElementById("next-button").addEventListener("click", async (e) => {
   console.log(age);
 
   // Validate form data
-  if (!bio || !dob || !gender || interestedFields.length === 0) {
+  if (!bio || !dob || !genderInput || interestedFields.length === 0) {
     alert("Please fill all required fields.");
     return;
   }
