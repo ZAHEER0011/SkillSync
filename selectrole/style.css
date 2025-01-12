@@ -181,14 +181,14 @@ body{
     transition: transform 0.1s ease;
     position: relative;
     color: white;
-    opacity: 0; /* Initially hidden */
-    transform: scale(0.8); /* Scaled down */
+    /* opacity: 0; Initially hidden */
+    /* transform: scale(1); Scaled down */
     transition: opacity 1.6s ease, transform 1.6s ease; /* Smooth animation */
 }
-.card.show {
-    opacity: 1; /* Fully visible */
-    transform: scale(1); /* Normal size */
-}
+/* .card.show { */
+    /* opacity: 1; Fully visible */
+    /* transform: scale(1); Normal size */
+/* } */
 .mid-section{
     display: flex;
     justify-content: space-between;

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input your Details</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="card-section">
+        <div class="ball1"></div>
+        <div class="ball2"></div>
+        <div class="card">
+          <div class="top-section">
+            <h1>Enter your Details</h1>
+          </div>
+          <div class="input-section">
+            <div class="bio-section">
+              <label for="bio">Bio</label>
+              <textarea
+                id="bio"
+                maxlength="150"
+                placeholder="Enter your bio..."
+                rows="3"
+              ></textarea>
+              <div id="bio-counter">0/150</div>
+            </div>
+            <!-- <input
+              type="text"
+              name="bio"
+              id="bio"
+              placeholder="Enter Your BIO"
+              class="text-input"
+            /> -->
+            <div class="dob">
+              <label for="dateofbirth">Date of Birth</label>
+              <input
+                type="date"
+                name="dob"
+                id="dateofbirth"
+                class="dob-input"
+              />
+            </div>
+            <div class="genders">
+              <p>Pick your Gender</p>
+              <div class="gender-main-section">
+                <section class="male">
+                  
+                  <input
+                    type="radio"
+                    name="gender"
+                    id="male-gender"
+                    class="gender-input"
+                  />
+                  <label for="male-gender" class="gender-label">MALE</label>
+                </section>
+                <section class="female">
+                  
+                  <input
+                    type="radio"
+                    name="gender"
+                    id="female-gender"
+                    class="gender-input"
+                  />
+                  <label for="female-gender" class="gender-label">FEMALE</label>
+                </section>
+              </div>
+            </div>
+
+            <div class="interested-fields-container">
+              <label for="interested-fields">Select Interested Fields</label>
+              <div class="select-btn" id="interested-fields">
+                  <span class="btn-text">Choose fields...</span>
+                  <span class="arrow-dwn">
+                      <i class="fa-solid fa-chevron-down"></i>
+                  </span>
+              </div>
+              <ul class="list-items">
+                  <li class="item">
+                      <span class="checkbox">
+                          <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">Software Development</span>
+                  </li>
+                  <li class="item">
+                      <span class="checkbox">
+                          <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">Mobile App Development</span>
+                  </li>
+                  <li class="item">
+                      <span class="checkbox">
+                          <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">Cloud Computing and Networking</span>
+                  </li>
+                  <li class="item">
+                      <span class="checkbox">
+                          <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">Design and User Experience</span>
+                  </li>
+                  <li class="item">
+                      <span class="checkbox">
+                          <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">Artificial Intelligence and Machine Learning</span>
+                  </li>
+                  <li class="item">
+                      <span class="checkbox">
+                          <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text">Blockchain and Cryptography</span>
+                  </li>
+                  <li class="item">
+                    <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                    <span class="item-text">Hardware and Electronics</span>
+                  </li>
+                  <li class="item">
+                    <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                    <span class="item-text">Cybersecurity</span>
+                </li>
+                <li class="item">
+                  <span class="checkbox">
+                      <i class="fa-solid fa-check check-icon"></i>
+                  </span>
+                  <span class="item-text">Game and Interactive Media</span>
+                </li>
+                <li class="item">
+                  <span class="checkbox">
+                      <i class="fa-solid fa-check check-icon"></i>
+                  </span>
+                  <span class="item-text">Emerging Technologies</span>
+                </li>
+                <li class="item">
+                  <span class="checkbox">
+                      <i class="fa-solid fa-check check-icon"></i>
+                  </span>
+                  <span class="item-text">Industry-Specific Fields</span>
+                </li>
+                <li class="item">
+                  <span class="checkbox">
+                      <i class="fa-solid fa-check check-icon"></i>
+                  </span>
+                  <span class="item-text">Programming Languages</span>
+                </li>
+                <li class="item">
+                  <span class="checkbox">
+                      <i class="fa-solid fa-check check-icon"></i>
+                  </span>
+                  <span class="item-text">Others</span>
+                </li>
+              </ul>
+            </div>
+            <div id="selected-fields" class="selected-fields-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

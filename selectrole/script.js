@@ -122,8 +122,8 @@ nextButton.addEventListener("click", async () => {
   }
 });
 
-export const getSelectedRole = () => {
-    if (document.querySelector(".left").classList.contains("selected")) return "Student";
-    if (document.querySelector(".right").classList.contains("selected")) return "Recruiter";
-    return null;
-};
+// export const getSelectedRole = () => {
+//     if (document.querySelector(".left").classList.contains("selected")) return "Student";
+//     if (document.querySelector(".right").classList.contains("selected")) return "Recruiter";
+//     return null;
+// };
