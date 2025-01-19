@@ -22,79 +22,83 @@
     <script type="module" src="./authentication/auth.js" defer></script>
   </head>
   <body>
+    <!-- Header -->
+    <div id="loading-overlay" style="display: none">
+      <div id="loading-indicator">
+        <p>Processing... Please wait.</p>
+      </div>
+    </div>
+    <div class="header">
+      <header class="nav-bar">
+        <div class="left">
+          <a href="#logo" class="logo">
+            <img src="./image/logo.png" alt="logo" />
 
-          
-      <!-- Header -->
-      <div id="loading-overlay" style="display: none;">
-        <div id="loading-indicator">
-          <p>Processing... Please wait.</p>
+            <span class="logo-text">SkillSync</span>
+          </a>
         </div>
-      </div>
-      <div class="header">
-        <header class="nav-bar">
-          <div class="left">
-            <a href="#logo" class="logo">
-              <img src="./image/logo.png" alt="logo" />
+        <div class="middle">
+          <nav class="nav">
+            <a href="#home" class="nav-link" id="homepage">Home</a>
+            <a href="#testimonial-section" class="nav-link">Features</a>
+            <!-- <a href="#pricing" class="nav-link">Dashboard</a> -->
+            <!-- <a href="#blog" class="nav-link">Blog</a> -->
+            <a href="#about" class="nav-link">About</a>
+          </nav>
+        </div>
+        <div class="right">
+          <a href="#contact" class="contact-button" onclick="openModal()">
+            Login
+          </a>
+        </div>
 
-              <span class="logo-text">SkillSync</span>
-            </a>
-          </div>
-          <div class="middle">
-            <nav class="nav">
-              <a href="#home" class="nav-link" id="homepage">Home</a>
-              <a href="#testimonial-section" class="nav-link">Features</a>
-              <!-- <a href="#pricing" class="nav-link">Dashboard</a> -->
-              <!-- <a href="#blog" class="nav-link">Blog</a> -->
-              <a href="#about" class="nav-link">About</a>
-            </nav>
-          </div>
-          <div class="right">
-            <a href="#contact" class="contact-button" onclick="openModal()"> Login </a>
-          </div>
+        <button type="button" class="menu-button">
+          <img src="./image/menu.png" alt="menubutton" class="menu-icon" />
+        </button>
+      </header>
+    </div>
 
-          <button type="button" class="menu-button">
-            <img src="./image/menu.png" alt="menubutton" class="menu-icon" />
-          </button>
-        </header>
-      </div>
-
-      <!-- Content Section  -->
-      <div class="content">
-        <div class="main">
-          <div class="content-left">
-            <p class="section-label">Empowering Careers, One Skill at a Time</p>
-            <h1 class="section-heading">
-              Transforming Education into Employability
-            </h1>
-            <p class="section-description">
-              SkillSync is your gateway to job-ready skills and industry-aligned
-              learning paths. Our platform bridges the gap between academic
-              knowledge and real-world demands, empowering students to excel in
-              their careers. Start your journey today and unlock your full
-              potential with personalized tools and insights.
-            </p>
-            <div class="button-group">
-              <a href="#start" class="start-button" onclick="openModal()">Start Now</a>
-              <a href="#testimonial-section" class="tour-button">Take Tour</a>
-            </div>
+    <!-- Content Section  -->
+    <div class="content">
+      <div class="main">
+        <div class="content-left">
+          <p class="section-label">Very proud to introduce, SkillSync</p>
+          <h1 class="section-heading">Aligning Learning with Earning</h1>
+          <p class="section-description">
+            SkillSync is an innovative platform designed to bridge the gap
+            between academic learning and real-world industry demands. By
+            offering personalized skill assessments, tailored learning paths,
+            and seamless job alignment, we empower students and professionals to
+            build industry-ready expertise. Whether you're exploring career
+            opportunities, upskilling, or redefining your potential, SkillSync
+            provides the tools and insights to help you succeed in today’s
+            competitive landscape. Unlock your true potential with
+            SkillSync—where skills meet success
+          </p>
+          <div class="button-group">
+            <a href="#start" class="start-button" onclick="openModal()"
+              >Start Now</a
+            >
+            <a href="#testimonial-section" class="tour-button">Take Tour</a>
           </div>
+        </div>
 
-          <div class="content-right">
-            <div class="image-container">
-              <!-- <img
+        <div class="content-right">
+          <div class="image-container">
+            <!-- <img
                 src="https://www.computersciencedegreehub.com/wp-content/uploads/2023/02/shutterstock_535124956-scaled.jpg"
                 class="section-image"
                 alt=""
               /> -->
-              <img src="./image/rb_123.png" class="section-image" alt="">
-            </div>
+            <img src="./image/rb_123.png" class="section-image" alt="" />
           </div>
         </div>
       </div>
+    </div>
 
-        <!-- Company Container  -->
+    <!-- Company Container  -->
 
-      <!-- <div class="company-container">
+    <!-- <div class="company-container">
         <h2>Trusted by the best</h2>
         <div class="company-grid">
           <div class="company-logo">
@@ -119,238 +123,238 @@
         </div>
       </div> -->
 
-      <!-- Feature Container  -->
+    <!-- Feature Container  -->
 
-      <div class="feature-container" id="#feature-container">
-        <div class="feature-content">
-          <div class="main-info">
-            <h2>What Sets SkillSync Apart</h2>
+    <div class="feature-container" id="#feature-container">
+      <div class="feature-content">
+        <div class="main-info">
+          <h2>What Sets SkillSync Apart</h2>
 
-            <p>
-              Discover the key features that make SkillSync the ultimate platform
-              for bridging the gap between education and industry.
-            </p>
+          <p>
+            Discover the key features that make SkillSync the ultimate platform
+            for bridging the gap between education and industry.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <!--Card 1-->
+          <div class="feature-card">
+            <div class="icon-container">
+              <img src="./image/PersonalizedLearn.svg" alt="" />
+            </div>
+
+            <div class="feature-info">
+              <div class="feature-title">Discover Your Potential</div>
+              <div class="feature-description">
+                An advanced skill assessment tool identifies strengths and areas
+                for improvement, helping students focus on what matters most for
+                career growth and skill enhancement.
+              </div>
+            </div>
           </div>
+          <!--Card 2-->
+          <div class="feature-card">
+            <div class="icon-container">
+              <img src="./image/Affordability.svg" alt="" />
+            </div>
 
-          <div class="feature-grid">
-            <!--Card 1-->
-            <div class="feature-card">
-              <div class="icon-container">
-                <img src="./image/PersonalizedLearn.svg" alt="" />
-              </div>
-
-              <div class="feature-info">
-                <div class="feature-title">Discover Your Potential</div>
-                <div class="feature-description">
-                  An advanced skill assessment tool identifies strengths and areas
-                  for improvement, helping students focus on what matters most for
-                  career growth and skill enhancement.
-                </div>
+            <div class="feature-info">
+              <div class="feature-title">Tailored Skill Development</div>
+              <div class="feature-description">
+                SkillSync provides personalized learning paths based on your
+                skill assessment results. AI ensures every student gets the most
+                effective resources and courses to bridge their specific
+                knowledge gaps.
               </div>
             </div>
-            <!--Card 2-->
-            <div class="feature-card">
-              <div class="icon-container">
-                <img src="./image/Affordability.svg" alt="" />
-              </div>
-
-              <div class="feature-info">
-                
-                <div class="feature-title">Tailored Skill Development</div>
-                <div class="feature-description">
-                  SkillSync provides personalized learning paths based on your
-                  skill assessment results. AI ensures every student gets the most
-                  effective resources and courses to bridge their specific
-                  knowledge gaps.
-                </div>
-              </div>
-            </div>
-            <!--Card 3-->
-            <div class="feature-card">
-              <div class="icon-container">
-                <img src="./image/IndustryPatner.svg" alt="" />
-              </div>
-
-              <div class="feature-info">
-                <div class="feature-title">Aligning Skills with Careers</div>
-                <div class="feature-description">
-                  SkillSync bridges the gap between education and employment by
-                  matching learners with industry job requirements. Get job
-                  recommendations based on your skills and personalized career
-                  guidance.
-                </div>
-              </div>
-            </div>
-            <!--Card 4-->
-            <div class="feature-card">
-              <div class="icon-container">
-                <img src="./image/InnovativeTech.svg" alt="" />
-              </div>
-
-              <div class="feature-info">
-                <div class="feature-title">AI-Driven Career Insights</div>
-                <div class="feature-description">
-                  Leverage cutting-edge AI to predict industry trends and provide
-                  data-driven solutions. The integrated AI chatbot offers
-                  real-time assistance, ensuring learners stay ahead in their
-                  careers.
-                </div>
-              </div>
-            </div>
-            <!--Card 5-->
-            <div class="feature-card">
-              <div class="icon-container">
-                <img src="./image/Analytics.svg" alt="" />
-              </div>
-
-              <div class="feature-info">
-                <div class="feature-title">Track and Optimize Progress</div>
-                <div class="feature-description">
-                  Detailed analytics help students and educators monitor learning
-                  progress, identify gaps, and make data-driven decisions to
-                  maximize learning outcomes.
-                </div>
-              </div>
-            </div>
-            <!--Card 6-->
-            <div class="feature-card">
-              <div class="icon-container">
-                <img src="./image/headset.svg" alt="" />
-              </div>
-
-              <div class="feature-info">
-                <div class="feature-title">Always Here to Help</div>
-                <div class="feature-description">
-                  Our dedicated support system ensures that learners and educators
-                  can access assistance whenever needed, providing a seamless and
-                  stress-free experience.
-                </div>
-              </div>
-            </div>
-            <!--Card 7-->
-            <!--Card 8-->
           </div>
+          <!--Card 3-->
+          <div class="feature-card">
+            <div class="icon-container">
+              <img src="./image/IndustryPatner.svg" alt="" />
+            </div>
+
+            <div class="feature-info">
+              <div class="feature-title">Aligning Skills with Careers</div>
+              <div class="feature-description">
+                SkillSync bridges the gap between education and employment by
+                matching learners with industry job requirements. Get job
+                recommendations based on your skills and personalized career
+                guidance.
+              </div>
+            </div>
+          </div>
+          <!--Card 4-->
+          <div class="feature-card">
+            <div class="icon-container">
+              <img src="./image/InnovativeTech.svg" alt="" />
+            </div>
+
+            <div class="feature-info">
+              <div class="feature-title">AI-Driven Career Insights</div>
+              <div class="feature-description">
+                Leverage cutting-edge AI to predict industry trends and provide
+                data-driven solutions. The integrated AI chatbot offers
+                real-time assistance, ensuring learners stay ahead in their
+                careers.
+              </div>
+            </div>
+          </div>
+          <!--Card 5-->
+          <div class="feature-card">
+            <div class="icon-container">
+              <img src="./image/Analytics.svg" alt="" />
+            </div>
+
+            <div class="feature-info">
+              <div class="feature-title">Track and Optimize Progress</div>
+              <div class="feature-description">
+                Detailed analytics help students and educators monitor learning
+                progress, identify gaps, and make data-driven decisions to
+                maximize learning outcomes.
+              </div>
+            </div>
+          </div>
+          <!--Card 6-->
+          <div class="feature-card">
+            <div class="icon-container">
+              <img src="./image/headset.svg" alt="" />
+            </div>
+
+            <div class="feature-info">
+              <div class="feature-title">Always Here to Help</div>
+              <div class="feature-description">
+                Our dedicated support system ensures that learners and educators
+                can access assistance whenever needed, providing a seamless and
+                stress-free experience.
+              </div>
+            </div>
+          </div>
+          <!--Card 7-->
+          <!--Card 8-->
         </div>
       </div>
+    </div>
 
-      <!-- Testimonial Container  -->
+    <!-- Testimonial Container  -->
 
-      <div class="testimonial-container" id="testimonial-section">
-        <div class="testimonial-content">
-          <h2>Explore Our Features & Products</h2>
-          <div class="testimonial-grid">
-            <!--Card 1-->
+    <div class="testimonial-container" id="testimonial-section">
+      <div class="testimonial-content">
+        <h2>Explore Our Features & Products</h2>
+        <div class="testimonial-grid">
+          <!--Card 1-->
 
-            <div class="testimonial-card">
-              <div class="testimonial-main">
-                <div class="testimonial-text">
-                  Our Skill Assessment Tool leverages advanced AI algorithms to
-                  evaluate your current skills. By taking personalized quizzes and
-                  assessments, you'll gain deep insights into your strengths,
-                  areas for improvement, and hidden talents. Whether you're a
-                  student, job seeker, or professional, this tool helps you stay
-                  ahead in your career.
-                </div>
-                <div class="testimonial-avatar">
-                  <img src="./image/chart-line.svg" alt="" />
-                </div>
-                <div class="testimonial-details">
-                  <h3>Discover Your Potential</h3>
-                  <p><a href="#">Learn More</a></p>
-                </div>
+          <div class="testimonial-card">
+            <div class="testimonial-main">
+              <div class="testimonial-text">
+                Our Skill Assessment Tool leverages advanced AI algorithms to
+                evaluate your current skills. By taking personalized quizzes and
+                assessments, you'll gain deep insights into your strengths,
+                areas for improvement, and hidden talents. Whether you're a
+                student, job seeker, or professional, this tool helps you stay
+                ahead in your career.
+              </div>
+              <div class="testimonial-avatar">
+                <img src="./image/chart-line.svg" alt="" />
+              </div>
+              <div class="testimonial-details">
+                <h3>Discover Your Potential</h3>
+                <p><a href="#">Learn More</a></p>
               </div>
             </div>
+          </div>
 
-            <!--Card 2-->
+          <!--Card 2-->
 
-            <div class="testimonial-card">
-              <div class="testimonial-main">
-                <div class="testimonial-text">
-                  Keep track of your skill development journey with our Skill Map
-                  Dashboard. This intuitive tool provides an at-a-glance view of
-                  your progress, comparing your current abilities with industry
-                  benchmarks. Use visual charts and analytics to set realistic
-                  goals and monitor your achievements in real time.
-                </div>
-                <div class="testimonial-avatar">
-                  <img src="./image/tasks.svg" alt="" />
-                </div>
-                <div class="testimonial-details">
-                  <h3>Visualize Your Growth</h3>
-                  <p><a href="#">Learn More</a></p>
-                </div>
+          <div class="testimonial-card">
+            <div class="testimonial-main">
+              <div class="testimonial-text">
+                Keep track of your skill development journey with our Skill Map
+                Dashboard. This intuitive tool provides an at-a-glance view of
+                your progress, comparing your current abilities with industry
+                benchmarks. Use visual charts and analytics to set realistic
+                goals and monitor your achievements in real time.
+              </div>
+              <div class="testimonial-avatar">
+                <img src="./image/tasks.svg" alt="" />
+              </div>
+              <div class="testimonial-details">
+                <h3>Visualize Your Growth</h3>
+                <p><a href="#">Learn More</a></p>
               </div>
             </div>
+          </div>
 
-            <!--Card 3-->
+          <!--Card 3-->
 
-            <div class="testimonial-card">
-              <div class="testimonial-main">
-                <div class="testimonial-text">
-                  We create a personalized learning path tailored just for you.
-                  Based on your skill gaps, career aspirations, and interests,
-                  this feature offers step-by-step guidance. Get recommendations
-                  for courses, resources, and practical projects that empower you
-                  to achieve your goals faster and more efficiently.
-                </div>
-                <div class="testimonial-avatar">
-                  <img src="./image/road.svg" alt="" />
-                </div>
-                <div class="testimonial-details">
-                  <h3>Your Roadmap to Success</h3>
-                  <p><a href="#">Learn More</a></p>
-                </div>
+          <div class="testimonial-card">
+            <div class="testimonial-main">
+              <div class="testimonial-text">
+                We create a personalized learning path tailored just for you.
+                Based on your skill gaps, career aspirations, and interests,
+                this feature offers step-by-step guidance. Get recommendations
+                for courses, resources, and practical projects that empower you
+                to achieve your goals faster and more efficiently.
+              </div>
+              <div class="testimonial-avatar">
+                <img src="./image/road.svg" alt="" />
+              </div>
+              <div class="testimonial-details">
+                <h3>Your Roadmap to Success</h3>
+                <p><a href="#">Learn More</a></p>
               </div>
             </div>
+          </div>
 
-            <!--Card 4-->
+          <!--Card 4-->
 
-            <div class="testimonial-card">
-              <div class="testimonial-main">
-                <div class="testimonial-text">
-                  Seamlessly connect with jobs that align with your skills and
-                  ambitions. Industry Job Sync matches your profile with
-                  opportunities from top companies, providing tailored
-                  recommendations. Whether you're starting your career or looking
-                  to advance, this feature ensures you're always job-ready.
-                </div>
-                <div class="testimonial-avatar">
-                  <img src="./image/sync.svg" alt="" />
-                </div>
-                <div class="testimonial-details">
-                  <h3>Bridge to Your Dream Job</h3>
-                  <p><a href="#">Learn More</a></p>
-                </div>
+          <div class="testimonial-card">
+            <div class="testimonial-main">
+              <div class="testimonial-text">
+                Seamlessly connect with jobs that align with your skills and
+                ambitions. Industry Job Sync matches your profile with
+                opportunities from top companies, providing tailored
+                recommendations. Whether you're starting your career or looking
+                to advance, this feature ensures you're always job-ready.
+              </div>
+              <div class="testimonial-avatar">
+                <img src="./image/sync.svg" alt="" />
+              </div>
+              <div class="testimonial-details">
+                <h3>Bridge to Your Dream Job</h3>
+                <p><a href="#">Learn More</a></p>
               </div>
             </div>
+          </div>
 
-            <!-- Card 5 -->
+          <!-- Card 5 -->
 
-            <div class="testimonial-card">
-              <div class="testimonial-main">
-                <div class="testimonial-text">
-                  Meet your virtual career advisor, powered by cutting-edge AI.
-                  Whether you need help choosing a career path, tips on cracking
-                  interviews, or solutions to academic challenges, our AI Chatbot
-                  is here 24/7. Get accurate, personalized responses in seconds
-                </div>
-                <div class="testimonial-avatar">
-                  <img src="./image/robot.svg" alt="" />
-                </div>
-                <div class="testimonial-details">
-                  <h3>Instant Guidance, Anytime</h3>
-                  <p><a href="#">Learn More</a></p>
-                </div>
+          <div class="testimonial-card">
+            <div class="testimonial-main">
+              <div class="testimonial-text">
+                Meet your virtual career advisor, powered by cutting-edge AI.
+                Whether you need help choosing a career path, tips on cracking
+                interviews, or solutions to academic challenges, our AI Chatbot
+                is here 24/7. Get accurate, personalized responses in seconds
+              </div>
+              <div class="testimonial-avatar">
+                <img src="./image/robot.svg" alt="" />
+              </div>
+              <div class="testimonial-details">
+                <h3>Instant Guidance, Anytime</h3>
+                <p><a href="#">Learn More</a></p>
               </div>
             </div>
-            <div id="login-testimonial">
-              <div class="right">
-                <a href="#contact" class="contact-button" onclick="openModal()"> Login </a>
-              </div>
+          </div>
+          <div id="login-testimonial">
+            <div class="right">
+              <a href="#contact" class="contact-button" onclick="openModal()">
+                Login
+              </a>
             </div>
-            
+          </div>
 
-            <!-- <div class="testimonial-card">
+          <!-- <div class="testimonial-card">
               
               <div class="testimonial-main">
                 <div class="testimonial-text">
@@ -368,13 +372,13 @@
               </div>
 
             </div> -->
-          </div>
         </div>
       </div>
+    </div>
 
-      <!-- Newsletter or Login Container  -->
+    <!-- Newsletter or Login Container  -->
 
-      <div class="newsletter-container">
+    <!-- <div class="newsletter-container">
         <div class="newsletter-content">
           <div class="news-left">
             <img src="./image/login_side.jpeg" loading="lazy" alt="" />
@@ -398,63 +402,70 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <!-- Footer Container  -->
+    <!-- Footer Container  -->
 
-      <div class="footer-container">
-        <footer class="footer-content">
-          <div class="footer-top">
-            <div class="comp-logo">
-              <a href="#home" class="logo-link">
-                <img class="logo-png" src="./image/logo.png" alt="" />
-                StudyCode
-              </a>
-            </div>
-
-            <p class="filler-text">Seamless Learning for Brighter Futures.</p>
-
-            <div class="social">
-              <a href="#instagram" class="social-links">
-                <img src="./image/instagram.svg" class="social-icon" alt="" />
-              </a>
-              <a href="#twitter" class="social-links">
-                <img src="./image/twitter.svg" class="social-icon" alt="" />
-              </a>
-              <a href="#linkedin" class="social-links">
-                <img src="./image/linkedin-copy.svg" class="social-icon" alt="" />
-              </a>
-              <a href="#github" class="social-links">
-                <img src="./image/github.svg" class="social-icon" alt="" />
-              </a>
-            </div>
+    <div class="footer-container">
+      <footer class="footer-content">
+        <div class="footer-top">
+          <div class="comp-logo">
+            <a href="#home" class="logo-link">
+              <img class="logo-png" src="./image/logo.png" alt="" />
+              SkillSync
+            </a>
           </div>
 
-          <div class="footer-grid">
-            <!--Column 1-->
+          <p class="filler-text">Aligning Learning with Earning</p>
 
-            <div class="footer-grid-column">
-              <div class="footer-grid-heading">Products</div>
+          <div class="social">
+            <a href="#instagram" class="social-links">
+              <img src="./image/instagram.svg" class="social-icon" alt="" />
+            </a>
+            <a href="#twitter" class="social-links">
+              <img src="./image/twitter.svg" class="social-icon" alt="" />
+            </a>
+            <a href="#linkedin" class="social-links">
+              <img src="./image/linkedin-copy.svg" class="social-icon" alt="" />
+            </a>
+            <a href="#github" class="social-links">
+              <img src="./image/github.svg" class="social-icon" alt="" />
+            </a>
+          </div>
+        </div>
 
-              <ul class="footer-links-list">
-                <li>
-                  <a href="#overview" class="footer-link">Overview</a>
-                </li>
-                <li>
-                  <a href="#solution" class="footer-link">Solutions</a>
-                </li>
-                <li>
-                  <a href="#pricing" class="footer-link">Pricing</a>
-                </li>
-                <li>
-                  <a href="#customers" class="footer-link">Customers</a>
-                </li>
-              </ul>
-            </div>
+        <div class="footer-grid">
+          <!--Column 1-->
 
-            <!--Column 2-->
+          <div class="footer-grid-column">
+            <div class="footer-grid-heading">Products</div>
 
-            <div class="footer-grid-column">
+            <ul class="footer-links-list">
+              <li>
+                <a href="#overview" class="footer-link"
+                  >Personalized Dashboard</a
+                >
+              </li>
+              <li>
+                <a href="#solution" class="footer-link"
+                  >Skill Assessment Tool</a
+                >
+              </li>
+              <li>
+                <a href="#pricing" class="footer-link">Personalized Roadmap</a>
+              </li>
+              <li>
+                <a href="#customers" class="footer-link">Industry Job Sync</a>
+              </li>
+              <li>
+                <a href="#customers" class="footer-link">AI Chatbot</a>
+              </li>
+            </ul>
+          </div>
+
+          <!--Column 2-->
+
+          <!-- <div class="footer-grid-column">
               <div class="footer-grid-heading">Company</div>
               <ul class="footer-links-list">
                 <li>
@@ -475,118 +486,147 @@
                   <a href="#blog" class="footer-link">Blog</a>
                 </li>
               </ul>
-            </div>
+            </div> -->
 
-            <!--Column 3-->
+          <!--Column 3-->
 
-            <div class="footer-grid-column">
-              <div class="footer-grid-heading">Support</div>
-              <ul class="footer-links-list">
-                <li>
-                  <a href="#contact" class="footer-link">Contact</a>
-                </li>
-                <li>
-                  <a href="#documentation" class="footer-link">Documentation</a>
-                </li>
-                <li>
-                  <a href="#chat" class="footer-link">Chat</a>
-                </li>
-                <li>
-                  <a href="#faq" class="footer-link">FAQ</a>
-                </li>
-              </ul>
-            </div>
+          <div class="footer-grid-column">
+            <div class="footer-grid-heading">Support</div>
+            <ul class="footer-links-list">
+              <li>
+                <a href="#contact" class="footer-link">Contact</a>
+              </li>
+              <li>
+                <a href="#documentation" class="footer-link">Documentation</a>
+              </li>
+              <li>
+                <a href="#chat" class="footer-link">Chat</a>
+              </li>
+              <li>
+                <a href="#faq" class="footer-link">FAQ</a>
+              </li>
+            </ul>
+          </div>
 
-            <!--Column 4-->
+          <!--Column 4-->
 
-            <div class="footer-grid-column">
-              <div class="footer-grid-heading">Legal</div>
-              <ul class="footer-links-list">
-                <li>
-                  <a href="#tos" class="footer-link">Terms of Service</a>
-                </li>
-                <li>
-                  <a href="#privacy-policy" class="footer-link">Privacy Policy</a>
-                </li>
-                <li>
-                  <a href="#cookie-settings" class="footer-link"
-                    >Cookie Settings</a
-                  >
-                </li>
-              </ul>
+          <div class="footer-grid-column">
+            <div class="footer-grid-heading">Legal</div>
+            <ul class="footer-links-list">
+              <li>
+                <a href="#tos" class="footer-link">Terms of Service</a>
+              </li>
+              <li>
+                <a href="#privacy-policy" class="footer-link">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#cookie-settings" class="footer-link"
+                  >Cookie Settings</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+      <div class="footer-copyright">
+        &copy; 2024 - Present SkillSync. All rights reserved.
+      </div>
+    </div>
+
+    <!-- Modal Container -->
+    <div class="overlay" onclick="closeModal()"></div>
+    <div class="modal-container">
+      <div class="card" id="auth-card">
+        <!-- Front Side Login  -->
+
+        <div class="login-modal-container modal login card-face card-front">
+          <div class="modal-header">
+            <h1 class="login-heading">Login to Your Account</h1>
+            <div class="cross-image">
+              <img
+                src="./image/xmark.svg"
+                width="25px"
+                height="25px"
+                alt=""
+                onclick="closeModal()"
+              />
             </div>
           </div>
-        </footer>
-        <div class="footer-copyright">
-          &copy; 2021 - Present StudyCode. All rights reserved.
+          <div class="login-content">
+            <div class="content-head">
+              <p>Access your dashboard and explore new features!</p>
+            </div>
+            <div class="login-input">
+              <input type="email" placeholder="Email" id="login-email" />
+              <input
+                type="password"
+                placeholder="Password"
+                id="login-password"
+              />
+              <div class="news-policy" id="login-register">
+                Don't have an account?&nbsp;
+                <a class="policy-link flip-to-register flip-link"
+                  >Register Here</a
+                >
+              </div>
+            </div>
+            <button
+              class="login-modal-button"
+              onclick="openModal()"
+              id="login-button"
+            >
+              LOGIN
+            </button>
+          </div>
         </div>
 
+        <!-- Back SIde Register -->
 
-      </div>
-
-      <!-- Modal Container -->
-      <div class="overlay" onclick="closeModal()"></div>
-      <div class="modal-container">
-        <div class="card" id="auth-card">
-          
-          <!-- Front Side Login  -->
-
-          <div class="login-modal-container modal login card-face card-front">
-            <div class="modal-header">
-              <h1 class="login-heading">Login to Your Account</h1>
-              <div class="cross-image">
-                <img src="./image/xmark.svg" width="25px" height="25px" alt="" onclick="closeModal()">
-              </div>
-            </div>
-            <div class="login-content">
-              <div class="content-head">
-                <p>Access your dashboard and explore new features!</p>
-              </div>
-              <div class="login-input">
-                <input type="email" placeholder="Email" id="login-email">
-                <input type="password" placeholder="Password" id="login-password">
-                <div class="news-policy" id="login-register">
-                  Don't have an account?&nbsp;
-                  <a class="policy-link flip-to-register flip-link">Register Here</a>
-                </div>
-              </div>
-              <button class="login-modal-button" onclick="openModal()" id="login-button">LOGIN</button>
+        <div
+          class="login-modal-container modal register card-face card-back"
+          id="registerModal"
+        >
+          <div class="modal-header">
+            <h1 class="login-heading">Register Now</h1>
+            <div class="cross-image">
+              <img
+                src="./image/xmark.svg"
+                width="25px"
+                height="25px"
+                alt=""
+                onclick="closeModal()"
+              />
             </div>
           </div>
-
-          <!-- Back SIde Register -->
-
-          <div class="login-modal-container modal register card-face card-back" id="registerModal">
-            <div class="modal-header">
-              <h1 class="login-heading">Register Now</h1>
-              <div class="cross-image">
-                <img src="./image/xmark.svg" width="25px" height="25px" alt="" onclick="closeModal()">
+          <div class="login-content">
+            <div class="content-head">
+              <p>Create an account to unlock amazing features!</p>
+            </div>
+            <div class="login-input">
+              <input
+                type="text"
+                placeholder="User Name"
+                id="registration-username"
+              />
+              <input type="email" placeholder="Email" id="registration-email" />
+              <input
+                type="password"
+                placeholder="Password"
+                id="registration-password"
+              />
+              <div class="news-policy" id="login-register">
+                Already have an account?&nbsp;
+                <a class="policy-link flip-to-login flip-link">Login Here</a>
               </div>
             </div>
-            <div class="login-content">
-              <div class="content-head">
-                <p>Create an account to unlock amazing features!</p>
-              </div>
-              <div class="login-input">
-                <input type="text" placeholder="User Name" id="registration-username">
-                <input type="email" placeholder="Email" id="registration-email">
-                <input type="password" placeholder="Password" id="registration-password">
-                <div class="news-policy" id="login-register">
-                  Already have an account?&nbsp;
-                  <a class="policy-link flip-to-login flip-link">Login Here</a>
-                </div>
-              </div>
-              <button class="login-modal-button" id="register-button">REGISTER</button>
-            </div>
+            <button class="login-modal-button" id="register-button">
+              REGISTER
+            </button>
           </div>
-
         </div>
       </div>
-      
-    
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
-
-
-
