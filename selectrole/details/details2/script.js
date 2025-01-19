@@ -495,6 +495,15 @@ submitBtn.addEventListener("click", async () => {
   console.log("Experience Level:", experienceLevel);
   console.log("Selected Skills:", selectedSkills);
 
+  const skillsData = {};
+  selectedSkills.forEach((skill) => {
+    skillsData[skill] = {
+      assessmentAttempted: false, // Initial state
+      assessmentScore: null, // No score initially
+      lastAttemptTime: null, // No attempts yet
+    };
+  });
+
   if (!experienceLevel || selectedSkills.length === 0) {
     alert(
       "Please fill in all required fields (Industry Experience and Interested Skills)."
@@ -513,6 +522,8 @@ submitBtn.addEventListener("click", async () => {
   try {
     const userDocRef = doc(db, "Users", user.uid);
     const resumeFile = realFileBtn.files[0];
+
+
     let resumeURL = "";
 
     if (resumeFile) {
@@ -544,7 +555,8 @@ submitBtn.addEventListener("click", async () => {
       linkedin: linkedinLink || null,
       socials: socialsLink || null,
       industryExperience: experienceLevel,
-      interestedSkills: selectedSkills,
+      // interestedSkills: selectedSkills,
+      "skills": skillsData,
     };
 
     // Add resume download URL if available
