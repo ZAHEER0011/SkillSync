@@ -116,6 +116,12 @@ login.addEventListener("click", function (event) {
 
   console.log("Email entered - ", email);
 
+  if (!email || !password){
+    alert("Please fill all requred fields.")
+    loadingOverlay.style.display = "none";
+  }
+
+
   signInWithEmailAndPassword(auth, email, password)
     .then(async (userCredential) => {
       // Signed up
