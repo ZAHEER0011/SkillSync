@@ -61,7 +61,7 @@ items.forEach((item) => {
     if (checked && checked.length > 0) {
       btnText.innerText = `${checked.length} Selected`;
     } else {
-      btnText.innerText = "Select Language";
+      btnText.innerText = "Select Fields";
     }
   });
 });
@@ -76,7 +76,8 @@ function getSelectedFields() {
 
 document.getElementById("next-button").addEventListener("click", async (e) => {
   e.preventDefault();
-
+  const loadingOverlay = document.getElementById("loading-overlay");
+  loadingOverlay.style.display = "flex";
   // Extract values from form fields
   const bio = document.getElementById("bio").value.trim();
   console.log(bio);
@@ -96,6 +97,7 @@ document.getElementById("next-button").addEventListener("click", async (e) => {
   // Validate form data
   if (!bio || !dob || !genderInput || interestedFields.length === 0) {
     alert("Please fill all required fields.");
+    loadingOverlay.style.display = "none"; 
     return;
   }
 
@@ -103,6 +105,7 @@ document.getElementById("next-button").addEventListener("click", async (e) => {
     const user = auth.currentUser;
     if (!user) {
       alert("No user is logged in. Please log in first.");
+      loadingOverlay.style.display = "none"; 
       return;
     }
     const userDocRef = doc(db, "Users", user.uid);
@@ -116,9 +119,11 @@ document.getElementById("next-button").addEventListener("click", async (e) => {
       interestedFields,
     });
     window.location.href = "./details2/index.html";
+    loadingOverlay.style.display = "none"; 
   } catch (error) {
     console.error("Error saving details:", error);
     alert("Error saving details. Please try again.");
+    loadingOverlay.style.display = "none"; 
   }
 });
 

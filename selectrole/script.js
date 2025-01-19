@@ -79,6 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
 const nextButton = document.getElementById("next-button");
 
 nextButton.addEventListener("click", async () => {
+  const loadingOverlay = document.getElementById("loading-overlay");
+  loadingOverlay.style.display = "flex";
   // Check which role is selected
   const studentCard = document.querySelector(".left");
   const recruiterCard = document.querySelector(".right");
@@ -91,6 +93,7 @@ nextButton.addEventListener("click", async () => {
     role = "Recruiter";
   } else {
     alert("Please select a role before proceeding.");
+    loadingOverlay.style.display = "none";
     return;
   }
 
@@ -99,6 +102,7 @@ nextButton.addEventListener("click", async () => {
     const user = auth.currentUser;
     if (!user) {
       alert("No user is logged in. Please log in first.");
+      loadingOverlay.style.display = "none";
       return;
     }
 
@@ -108,17 +112,23 @@ nextButton.addEventListener("click", async () => {
     await updateDoc(userDocRef, { role });
 
     alert("Role saved successfully! Redirecting...");
+    loadingOverlay.style.display = "none";
     console.log("Role saved:", role);
 
     // Redirect to the appropriate dashboard
     if (role === "Student") {
+
       window.location.href = "./details/details.html";
+      loadingOverlay.style.display = "none";
+
     } else if (role === "Recruiter") {
       window.location.href = "../dashboard/recruiter-dashboard/index.html";
+      loadingOverlay.style.display = "none";
     }
   } catch (error) {
     console.error("Error saving role:", error);
     alert("An error occurred while saving your role. Please try again.");
+    loadingOverlay.style.display = "none";
   }
 });
 

@@ -37,56 +37,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-.nav-bar {
-  max-width: 1280px;
-  display: flex;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  /* border: 1px solid black; */
-}
-#homepage {
-  color: var(--link-color);
-}
-.logo img {
-  height: 2.1rem;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-.logo-text {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--light-gray);
-}
-
-.nav {
-  gap: 1.5rem;
-  display: none;
-}
-@media screen and (min-width: 790px) {
-  .nav {
-    display: flex;
-  }
-}
-.nav-link {
-  color: var(--light-gray);
-  font-size: 1.125rem;
-  font-weight: 600;
-  transform: color 0.1s;
-}
-.nav-link:hover {
-  color: var(--link-color);
-}
-.profile-logo {
-  background-color: white;
-  border-radius: 100%;
-  /* border: 1px solid black; */
-}
 .ball1 {
   width: 15rem;
   height: 15rem;
@@ -157,6 +107,28 @@ body {
     left: 75rem;
   }
 }
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.671); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it appears above all other content */
+}
+#loading-indicator {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 15px rgb(0, 0, 0.3);
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
 .card {
   display: flex;
   justify-content: center;
@@ -180,67 +152,103 @@ body {
   transition: opacity 1.6s ease, transform 1.6s ease, filter 1.3s ease; /* Smooth animation */
 }
 .card.show {
-opacity: 1; /* Fully visible */
+opacity: 1;  /*Fully visible */
 transform: scale(1); /* Normal size */
 filter: blur(0px);
 }
-.mid-section {
+.input-section{
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
-  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+  gap: 1rem;
+  flex-direction: column;
   color: white;
   text-align: center;
-  margin: 4rem 1.5rem;
+  margin: 1.5rem;
+  width: 450px;
+  height: 100%;
+
 }
-.right {
+.portfolio-section, .linkedin-section, .socials-section, .resume-section, .experience-section, .interested-skills-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  width: 140px;
-  font-size: 18px;
-  font-weight: bold;
+  align-items: start;
+  width: 100%;
+  gap: 10px;
+}
+
+.portfolio-section input{
+  width: 100%;
+  height: 2rem;
+  font-size: 15px;
+  padding: 1rem;
+  outline: none;
+}
+.linkedin-section input{
+  width: 100%;
+  height: 2rem;
+  font-size: 15px;
+  padding: 1rem;
+  outline: none;
+}
+.socials-section input{
+  width: 100%;
+  height: 2rem;
+  font-size: 15px;
+  padding: 1rem;
+  outline: none;
+}
+#resume-upload-button {
+  padding: 10px;
+  color: white;
+  background-color: rgba(176,0,83);
+  border: 1px solid #000;
+  border-radius: 5px;
   cursor: pointer;
 }
-.mid {
-  font-size: 24px;
+.resume-button{
   display: flex;
-  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  gap: 5rem;
+}
+#resume-upload-button:hover {
+  background-color: rgba(176,0,83);
+}
+
+#resume-file-text {
+  margin-left: 10px;
+  font-family: sans-serif;
+  color: #aaa;
+}
+
+.experience-section select{
+  width: 100%;
+  height: 3rem;
+  font-size: 15px;
+  padding: 0.5rem;
+  outline: none;
+  display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
+  outline: none;
+  text-align: left;
 }
-.left {
-  width: 140px;
-  font-size: 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  font-weight: bold;
-  cursor: pointer;
+
+.item.selected {
+  background-color: #d1e7dd; /* Light green background */
+  border-color: #0f5132; /* Dark green border */
+  color: #0f5132; /* Dark green text */
+  font-weight: bold; /* Make the text bold */
 }
-.left img {
-  border-radius: 100%;
-  width: 100px;
+
+.item .checkbox {
+  visibility: visible; /* Ensure checkbox or selection icon is visible */
 }
-.right img {
-  border-radius: 100%;
-  width: 100px;
-}
-.left.selected,
-.right.selected {
-  /* Pink border for selected role */
-  color: rgb(176, 0, 83); /* Change text color */
-}
-.bottom {
-  width: 80%;
-}
-/* From Uiverse.io by MuhammadHasann */
+
+
 button {
   position: relative;
   padding: 12px 35px;
@@ -255,28 +263,7 @@ button {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
-#loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.671); /* Semi-transparent background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999; /* Ensure it appears above all other content */
-}
-#loading-indicator {
-  background-color: #fff;
-  padding: 20px 30px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0px 0px 15px rgb(0, 0, 0.3);
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  color: #333;
-}
+
 .star-1 {
   position: absolute;
   top: 20%;

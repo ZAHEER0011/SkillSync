@@ -1,11 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Additional Details</title>
-</head>
-<body>
-    This is additional details page.
-</body>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div id="loading-overlay" style="display: none;">
+        <div id="loading-indicator">
+          <p>Processing... Please wait.</p>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="ball1"></div>
+        <div class="ball2"></div>
+        <div class="card">
+          <div class="top-section">
+            <h1>Enter Additional Details</h1>
+          </div>
+          <div class="input-section">
+            <div class="portfolio-section">
+              <label for="portfolio">Enter Portfolio Link</label>
+              <input
+                type="text"
+                id="portfolio"
+                class="portfolio-input"
+                placeholder="Portfolio Link..."
+              />
+            </div>
+            <div class="linkedin-section">
+              <label for="linkedin">Enter LinkedIn Profile Link</label>
+              <input
+                type="text"
+                id="linkedin"
+                class="linkedin-input"
+                placeholder="LinkedIn Link..."
+              />
+            </div>
+            <div class="socials-section">
+              <label for="socials">Enter any Social account Link</label>
+              <input
+                type="text"
+                id="socials"
+                class="socials-input"
+                placeholder="Any Socials (Instagram or Facebook or Twitter)..."
+              />
+            </div>
+            <div class="resume-section">
+              <label for="resume">Upload Resume</label>
+              <div class="resume-button">
+                <input type="file" id="resume-file" hidden="hidden" />
+                <button type="button" id="resume-upload-button">
+                  CHOOSE A FILE
+                </button>
+                <span id="resume-file-text">No file chosen, yet.</span>
+              </div>
+            </div>
+            <div class="experience-section">
+              <label for="experience">Industry Level Experience</label>
+              <select name="experience" id="experience">
+                <option value="" disabled selected>Choose experience...</option>
+                <option value="fresher">Fresher</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="expert">Expert</option>
+              </select>
+            </div>
+            <div class="interested-skills-container">
+              <label for="interested-skills"
+                >Select Interested Skills from your Interested Fields</label
+              >
+              <div class="select-btn" id="interested-fields">
+                <span class="btn-text">Choose skills...</span>
+                <span class="arrow-dwn">
+                  <i class="fa-solid fa-chevron-down"></i>
+                </span>
+              </div>
+              <!-- Dynamically populate the list-items -->
+              <ul class="list-items"></ul>
+            </div>
+            <div id="selected-fields" class="selected-fields-container"></div>
+        </div>
+        <section class="bottom">
+            <button id="submit-button">
+              SUBMIT
+              <div class="star-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  version="1.1"
+                  style="
+                    shape-rendering: geometricPrecision;
+                    text-rendering: geometricPrecision;
+                    image-rendering: optimizeQuality;
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                  "
+                  viewBox="0 0 784.11 815.53"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs></defs>
+                  <g id="Layer_x0020_1">
+                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                    <path
+                      class="fil0"
+                      d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                    ></path>
+                  </g>
+                </svg>
+              </div>
+              <div class="star-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  version="1.1"
+                  style="
+                    shape-rendering: geometricPrecision;
+                    text-rendering: geometricPrecision;
+                    image-rendering: optimizeQuality;
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                  "
+                  viewBox="0 0 784.11 815.53"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs></defs>
+                  <g id="Layer_x0020_1">
+                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                    <path
+                      class="fil0"
+                      d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                    ></path>
+                  </g>
+                </svg>
+              </div>
+              <div class="star-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  version="1.1"
+                  style="
+                    shape-rendering: geometricPrecision;
+                    text-rendering: geometricPrecision;
+                    image-rendering: optimizeQuality;
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                  "
+                  viewBox="0 0 784.11 815.53"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs></defs>
+                  <g id="Layer_x0020_1">
+                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                    <path
+                      class="fil0"
+                      d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                    ></path>
+                  </g>
+                </svg>
+              </div>
+              <div class="star-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  version="1.1"
+                  style="
+                    shape-rendering: geometricPrecision;
+                    text-rendering: geometricPrecision;
+                    image-rendering: optimizeQuality;
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                  "
+                  viewBox="0 0 784.11 815.53"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs></defs>
+                  <g id="Layer_x0020_1">
+                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                    <path
+                      class="fil0"
+                      d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                    ></path>
+                  </g>
+                </svg>
+              </div>
+              <div class="star-5">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  version="1.1"
+                  style="
+                    shape-rendering: geometricPrecision;
+                    text-rendering: geometricPrecision;
+                    image-rendering: optimizeQuality;
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                  "
+                  viewBox="0 0 784.11 815.53"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs></defs>
+                  <g id="Layer_x0020_1">
+                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                    <path
+                      class="fil0"
+                      d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                    ></path>
+                  </g>
+                </svg>
+              </div>
+              <div class="star-6">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xml:space="preserve"
+                  version="1.1"
+                  style="
+                    shape-rendering: geometricPrecision;
+                    text-rendering: geometricPrecision;
+                    image-rendering: optimizeQuality;
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                  "
+                  viewBox="0 0 784.11 815.53"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs></defs>
+                  <g id="Layer_x0020_1">
+                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                    <path
+                      class="fil0"
+                      d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                    ></path>
+                  </g>
+                </svg>
+              </div>
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>

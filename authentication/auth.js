@@ -40,6 +40,9 @@ const register = document.getElementById("register-button");
 register.addEventListener("click", function (event) {
   event.preventDefault();
 
+  const loadingOverlay = document.getElementById("loading-overlay");
+  loadingOverlay.style.display = "flex";
+
   //Input Values
 
   console.log("User registration started.");
@@ -70,10 +73,12 @@ register.addEventListener("click", function (event) {
 
         console.log("User details added to Firestore.");
         alert("Account Created!! Redirecting to your SkillSync Dashboard.");
+        loadingOverlay.style.display = "none";
         window.location.href = "./selectrole/index.html";
       } catch (error) {
         console.error("Error writing to Firestore:", error);
         alert("Failed to save user details. Please try again.");
+        loadingOverlay.style.display = "none";
       }
     })
     .catch((error) => {
@@ -84,8 +89,10 @@ register.addEventListener("click", function (event) {
         alert(
           "Entered Email Address already exist, please login instead of register."
         );
+        loadingOverlay.style.display = "none";
       } else {
         alert(errorMessage);
+        loadingOverlay.style.display = "none";
       }
 
       // ..
@@ -96,6 +103,9 @@ register.addEventListener("click", function (event) {
 
 login.addEventListener("click", function (event) {
   event.preventDefault();
+
+  const loadingOverlay = document.getElementById("loading-overlay");
+  loadingOverlay.style.display = "flex";
 
   //Input Values
 
@@ -122,7 +132,9 @@ login.addEventListener("click", function (event) {
         // Check for role first
         if (!userRole) {
           alert("Role not found. Please select your role first.");
+          loadingOverlay.style.display = "none";
           window.location.href = "./selectrole/index.html"; // Redirect to selectrole page
+
           return;
         }
 
@@ -131,6 +143,8 @@ login.addEventListener("click", function (event) {
         const dob = userData.dateOfBirth;
         const gender = userData.gender;
         const interestedFields = userData.interestedFields;
+        const interestedSkills = userData.interestedSkills;
+        const industryExperience = userData.industryExperience;
 
         if (
           !bio ||
@@ -140,22 +154,35 @@ login.addEventListener("click", function (event) {
           interestedFields.length === 0
         ) {
           alert("Additional details are incomplete. Please fill them in.");
+          loadingOverlay.style.display = "none";
           window.location.href = "./selectrole/details/details.html"; // Redirect to additional details page
           return;
         }
+        
+        if (!interestedSkills || interestedSkills === 0 || !industryExperience){
+          alert("Additional profile details are incomplete. Please fill them in from next page.");
+          loadingOverlay.style.display = "none";
+          window.location.href = "./selectrole/details/details2/index.html";
+          return;
+        }
+
+        
 
         // Redirect based on role
         if (userRole == "Student") {
+          
           window.location.href = "./dashboard/student-dashboard/index.html";
         } else if (userRole === "Recruiter") {
           window.location.href = "./dashboard/recruiter-dashboard/index.html";
         } else {
+          loadingOverlay.style.display = "none";
           alert(
             "Role not found. Please select your role first from next page."
           );
           window.location.href = "./selectrole/index.html";
         }
       } else {
+        loadingOverlay.style.display = "none";
         alert("User data not found, Please register first to proceed.");
       }
 
@@ -172,6 +199,7 @@ login.addEventListener("click", function (event) {
       const errorMessage = error.message;
       // alert(errorMessage);
       if (errorCode == "auth/invalid-credential") {
+        loadingOverlay.style.display = "none";
         alert("User data not found, Please register first to proceed.");
       }
       // ..
