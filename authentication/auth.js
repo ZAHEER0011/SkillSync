@@ -53,6 +53,7 @@ register.addEventListener("click", function (event) {
 
   if (!username || !email || !password) {
     alert("Please fill in all fields.");
+    loadingOverlay.style.display = "none";
     return;
   }
 
@@ -116,11 +117,14 @@ login.addEventListener("click", function (event) {
 
   console.log("Email entered - ", email);
 
-  if (!email || !password){
+  if (!email){
+    alert("Please fill all requred fields.")
+    loadingOverlay.style.display = "none";
+  } else if (!password){
     alert("Please fill all requred fields.")
     loadingOverlay.style.display = "none";
   }
-
+  
 
   signInWithEmailAndPassword(auth, email, password)
     .then(async (userCredential) => {
