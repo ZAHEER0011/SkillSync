@@ -24,24 +24,21 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
-
-    // Monitor Authentication State
-onAuthStateChanged(auth, async (user) => {
+  // Monitor Authentication State
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
         // Reference the user document
         const userDocRef = doc(db, "Users", user.uid);
-  
+
         // Fetch the user document
         const userDoc = await getDoc(userDocRef);
-  
+
         if (userDoc.exists()) {
           // Extract user data
           const userData = userDoc.data();
-  
+
           // Dynamically update the HTML with user details
           document.querySelector(".fullname-section p:nth-child(2)").innerText =
             userData.username || "N/A";
@@ -57,9 +54,23 @@ onAuthStateChanged(auth, async (user) => {
             userData.dateOfBirth || "N/A";
           document.querySelector(".gender-section p:nth-child(2)").innerText =
             userData.gender || "N/A";
-          document.querySelector(".experience-section p:nth-child(2)").innerText =
-            userData.industryExperience || "N/A";
-  
+          document.querySelector(
+            ".experience-section p:nth-child(2)"
+          ).innerText = userData.industryExperience || "N/A";
+          document.querySelector(
+            ".portfolio-section p:nth-child(2)"
+          ).innerText = userData.portfolio || "N/A";
+          document.querySelector(
+            ".interested-fields-section p:nth-child(2)"
+          ).innerText = Array.isArray(userData.interestedFields)
+            ? `[${userData.interestedFields.join(", ")}]` // Join array elements with a comma
+            : userData.interestedFields || "N/A";
+
+          document.querySelector(
+            ".interested-skills-section p:nth-child(2)"
+          ).innerText = userData.interestedSkills
+            ? `[${Object.keys(userData.interestedSkills).join(", ")}]`
+            : "N/A";
           // Update username in the top-left corner
           document.querySelector(".username-section p").innerText =
             userData.username || "User";
@@ -76,5 +87,4 @@ onAuthStateChanged(auth, async (user) => {
       alert("Please log in to view your details.");
     }
   });
-
 });

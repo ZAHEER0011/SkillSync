@@ -97,20 +97,30 @@ body {
   gap: 4rem;
 }
 .left-details{
-  width: 50%;
-  padding: 5rem;
+  width: 100%;
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: row;
+  gap: 6rem;
+  
+
+}
+.left-section, .right-section{
   display: flex;
   justify-content: center;
   align-items: start;
   flex-direction: column;
   gap: 2rem;
-  
-
+}
+.resume-link{
+  color: rgb(0, 204, 255);
 }
 .card {
   backdrop-filter: blur(10px);
   z-index: 1;
-  background: rgba(69, 0, 71, 0.479); /* Transparent black background */
+  background: rgba(20, 20, 20, 0.6); /* Transparent black background */
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 14px;
   position: relative;
@@ -118,12 +128,22 @@ body {
   opacity: 1; /* Initially hidden*/
   transform: scale(1); /*Scaled down*/
 }
-.right-details{
-  width: 50%;
-  padding: 5rem;
+
+.fullname-section, .email-section, .role-section, .age-section, .dob-section, .gender-section, .experience-section, .portfolio-section{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  
+}
+.bio-section, .interested-fields-section, .interested-skills-section, .resume-section{
   display: flex;
   justify-content: center;
   align-items: start;
   flex-direction: column;
-  gap: 2rem;
+  gap: 0.5rem;
+}
+.details-heading{
+  font-weight: bold;
+  font-size: 18px;
+  
 }

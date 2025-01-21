@@ -556,7 +556,7 @@ submitBtn.addEventListener("click", async () => {
       socials: socialsLink || null,
       industryExperience: experienceLevel,
       // interestedSkills: selectedSkills,
-      "skills": skillsData,
+      "interestedSkills": skillsData,
     };
 
     // Add resume download URL if available
