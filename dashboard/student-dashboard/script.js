@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import {
   getAuth,
+  signOut,
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 import {
@@ -24,9 +25,68 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
 
+// Get elements
+const modal = document.getElementById("userDetailsModal");
+const usernameTrigger = document.getElementById("usernameTrigger");
+const profileTrigger = document.getElementById("profileTrigger");
+const closeIcon = document.querySelector(".cross-image img");
+const overlay = document.querySelector(".overlay");
+// Function to open the modal
+function openModal() {
+  modal.classList.add("active");
+  overlay.classList.add("overlayactive");
+}
+
+// Function to close the modal
+function closeModal() {
+  modal.classList.remove("active");
+  overlay.classList.remove("overlayactive");
+}
+
+// Open modal when clicking on username or profile icon
+usernameTrigger.addEventListener("click", openModal);
+profileTrigger.addEventListener("click", openModal);
+
+// Close modal when clicking on the close icon
+closeIcon.addEventListener("click", closeModal);
+overlay.addEventListener("click", closeModal);
+
+// Close modal when clicking outside the modal content
+window.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    closeModal();
+  }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
+  let isLoggingOut = false; // Flag to track logout state
+
+  // Logout button logic
+  const logoutButton = document.querySelector(".logout-button");
+  logoutButton.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent the default link behavior
+    isLoggingOut = true; // Set flag to true during logout
+
+    signOut(auth)
+      .then(() => {
+        console.log("User successfully logged out.");
+        // Redirect to the landing page or login page
+        window.location.href = "../../index.html"; // Replace with the actual landing page URL
+      })
+      .catch((error) => {
+        console.error("Error during logout:", error);
+        alert("Error during logout. Please try again.");
+      })
+      .finally(() => {
+        isLoggingOut = false; // Reset flag after logout process
+      });
+  });
   // Monitor Authentication State
   onAuthStateChanged(auth, async (user) => {
+    if (isLoggingOut) {
+      // Skip this check if the user is logging out
+      return;
+    }
     if (user) {
       try {
         // Reference the user document

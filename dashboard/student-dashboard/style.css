@@ -90,13 +90,13 @@ body {
 }
 .details-section{
   max-width: 1280px;
-  margin: 4rem auto;
+  margin: 2rem auto;
   display: flex;
   justify-content: start;
   align-items: center;
   gap: 4rem;
 }
-.left-details{
+.main-section{
   width: 100%;
   padding: 3rem;
   display: flex;
@@ -125,22 +125,97 @@ body {
   border-radius: 14px;
   position: relative;
   color: white;
-  opacity: 1; /* Initially hidden*/
-  transform: scale(1); /*Scaled down*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.modal {
+  
+  /* position: fixed; */
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  scale: 0;
+  transition: 0.2s ease-in-out;
+  transform-origin: center;
+  /* background-color: rgba(0, 0, 0, 0.5); Black background with opacity */
+}
+.modal-header {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 0.5px solid white;
+  /* margin-bottom: 1.5rem; */
+}
+.active {
+  scale: 1;
+}
+.overlay {
+  position: fixed;
+  background-color: #160020a8;
+  top: 0;
+  opacity: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  transition: 0.2s ease-in-out;
+  z-index: 0;
+}
+.overlayactive {
+  opacity: 1;
+  pointer-events: initial;
 }
 
-.fullname-section, .email-section, .role-section, .age-section, .dob-section, .gender-section, .experience-section, .portfolio-section{
+/* .fullname-section, .email-section, .role-section, .age-section, .dob-section, .gender-section, .experience-section, .portfolio-section{
   display: flex;
   justify-content: start;
   align-items: center;
   
-}
-.bio-section, .interested-fields-section, .interested-skills-section, .resume-section{
+} */
+.bio-section, .interested-fields-section, .interested-skills-section, .resume-section, .fullname-section, .email-section, .role-section, .age-section, .dob-section, .gender-section, .experience-section, .portfolio-section{
   display: flex;
   justify-content: center;
   align-items: start;
   flex-direction: column;
   gap: 0.5rem;
+}
+.logout-button {
+  /* display: none; */
+  border: none;
+  border-radius: 0.375rem;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  transform: all 0.1s;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* margin: 2rem 0; */
+}
+.cross-image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.logout-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 2rem;
+}
+.logout-button:hover {
+  background-color: #5254f8;
 }
 .details-heading{
   font-weight: bold;

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SkillSync | Student-Dashboard</title>
     <link
       rel="stylesheet"
@@ -11,87 +11,106 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <!-- <h1>Student Dashboard Under Development!</h1>
     <p>Thank you for your patience. We're working hard to create a personalized and feature-rich student dashboard for you. Stay tuned for updates as we roll out new features to enhance your experience.</p>
      -->
     <div class="container">
-        <div class="header">
-            <header class="nav-bar">
-                <div class="left">
-                    <a href="" class="logo">
-                        <img src="../../image/logo.png" alt="logo" />
-    
-                        <span class="logo-text">SkillSync</span>
-                    </a>
-                </div>
-                <div class="right">
-                    <section class="username-section">
-                        <p></p>
-                    </section>
-                    <section class="userprofile-section">
-                        <i class="fas fa-user-circle" style="color: #c0c0c0;"></i>
-                    </section>
-                </div>
-            </header>
-        </div>
+      <div class="header">
+        <header class="nav-bar">
+          <div class="left">
+            <a href="" class="logo">
+              <img src="../../image/logo.png" alt="logo" />
 
+              <span class="logo-text">SkillSync</span>
+            </a>
+          </div>
+          <div class="right" id="usernameTrigger">
+            <section class="username-section">
+              <p></p>
+            </section>
+            <section class="userprofile-section" id="profileTrigger">
+              <i class="fas fa-user-circle" style="color: #c0c0c0"></i>
+            </section>
+          </div>
+        </header>
+      </div>
+
+      <div class="overlay"></div>
+      <div class="modal" id="userDetailsModal">
         <div class="details-section">
-            <div class="left-details card" id="card">
-                <div class="left-section">
-                    <div class="fullname-section ">
-                        <p class="fullname details-heading">UserName -&nbsp;</p>
-                        <p class="details"></p>
-                    </div>
-                    <div class="bio-section ">
-                        <p class="bio details-heading">Bio -&nbsp;</p>
-                        <p class="details"></p>
-                    </div>
-                    <div class="email-section ">
-                        <p class="email details-heading">Email -&nbsp;</p>
-                        <p class="details"></p>
-                    </div>
-                    <div class="role-section ">
-                        <p class="role details-heading">Role -&nbsp;</p>
-                        <p class="details"></p>
-                    </div>
-                    <div class="age-section ">
-                        <p class="age details-heading">Age -&nbsp;</p>
-                        <p class="details"></p>
-                    </div>
-                    <div class="dob-section ">
-                        <p class="dob details-heading">Date of Birth -&nbsp;</p>
-                        <p class="details"></p>
-                    </div>
-                    <div class="gender-section ">
-                        <p class="gender details-heading">Gender -&nbsp;</p>
-                        <p class="details"></p>
-                    </div>
-                </div>
-                <div class="right-section">
-                    <div class="experience-section ">
-                        <p class="experience details-heading">Experience -&nbsp;</p>
-                        <p class="details"></p>
-                    </div>
-                    <div class="portfolio-section ">
-                        <p class="portfolio details-heading">Portfolio -&nbsp;</p>
-                        <p class="details"></p>
-                    </div>
-                    <div class="interested-fields-section">
-                        <p class="fields details-heading">Interested Fields -&nbsp;</p>
-                        <p class="details"></p>
-                    </div>
-                    <div class="interested-skills-section">
-                        <p class="skills details-heading">Interested Skills -&nbsp;</p>
-                        <p class="details"></p>
-                    </div>
-                </div>
+          <div class="left-details card" id="card">
+            <div class="modal-header">
+              <h1 class="login-heading">User Details</h1>
+              <div class="cross-image">
+                <img
+                  src="./image/xmark.svg"
+                  width="25px"
+                  height="25px"
+                  alt=""
+                  
+                />
+              </div>
             </div>
-           
+            <div class="main-section">
+              <div class="left-section">
+                <div class="fullname-section">
+                  <p class="fullname details-heading">UserName :</p>
+                  <p class="details"></p>
+                </div>
+                <div class="bio-section">
+                  <p class="bio details-heading">Bio :</p>
+                  <p class="details"></p>
+                </div>
+                <div class="email-section">
+                  <p class="email details-heading">Email :</p>
+                  <p class="details"></p>
+                </div>
+                <div class="role-section">
+                  <p class="role details-heading">Role :</p>
+                  <p class="details"></p>
+                </div>
+                <div class="age-section">
+                  <p class="age details-heading">Age :</p>
+                  <p class="details"></p>
+                </div>
+                <div class="dob-section">
+                  <p class="dob details-heading">Date of Birth :</p>
+                  <p class="details"></p>
+                </div>
+                <div class="gender-section">
+                  <p class="gender details-heading">Gender :</p>
+                  <p class="details"></p>
+                </div>
+              </div>
+              <div class="right-section">
+                <div class="experience-section">
+                  <p class="experience details-heading">Experience :</p>
+                  <p class="details"></p>
+                </div>
+                <div class="portfolio-section">
+                  <p class="portfolio details-heading">Portfolio :</p>
+                  <p class="details"></p>
+                </div>
+                <div class="interested-fields-section">
+                  <p class="fields details-heading">Interested Fields :</p>
+                  <p class="details"></p>
+                </div>
+                <div class="interested-skills-section">
+                  <p class="skills details-heading">Interested Skills :</p>
+                  <p class="details"></p>
+                </div>
+              </div>
+            </div>
+            <div class="logout-section">
+              <a href="" class="logout-button"> Logout </a>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
     <script type="module" src="script.js"></script>
-</body>
+  </body>
 </html>
