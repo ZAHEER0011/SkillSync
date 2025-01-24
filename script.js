@@ -40,36 +40,36 @@ const closeModal = () => {
 const card = document.querySelector('.card');
 
 // Create glow element
-const glow = document.createElement('div');
-glow.className = 'glow';
-card.appendChild(glow);
+// const glow = document.createElement('div');
+// glow.className = 'glow';
+// card.appendChild(glow);
 
-// Show glow on mouse enter
-card.addEventListener('mouseenter', () => {
-    glow.style.opacity = '1'; // Make glow visible
-});
+// // Show glow on mouse enter
+// card.addEventListener('mouseenter', () => {
+//     glow.style.opacity = '1'; // Make glow visible
+// });
 
-// Hide glow on mouse leave
-card.addEventListener('mouseleave', () => {
-    glow.style.opacity = '0'; // Hide glow
-});
+// // Hide glow on mouse leave
+// card.addEventListener('mouseleave', () => {
+//     glow.style.opacity = '0'; // Hide glow
+// });
 
-// Move glow with mouse movement
-card.addEventListener('mousemove', (e) => {
-  const cardRect = card.getBoundingClientRect();
-  const modalWrapper = document.querySelector('.card');
+// // Move glow with mouse movement
+// card.addEventListener('mousemove', (e) => {
+//   const cardRect = card.getBoundingClientRect();
+//   const modalWrapper = document.querySelector('.card');
 
-  const isFlipped = modalWrapper.classList.contains('flipped')
+//   const isFlipped = modalWrapper.classList.contains('flipped')
 
-  const mouseX = isFlipped 
-    ? cardRect.width - (e.clientX - cardRect.left)
-    : e.clientX - cardRect.left;
-  const mouseY = e.clientY - cardRect.top;
+//   const mouseX = isFlipped 
+//     ? cardRect.width - (e.clientX - cardRect.left)
+//     : e.clientX - cardRect.left;
+//   const mouseY = e.clientY - cardRect.top;
   
 
-  glow.style.left = `${mouseX}px`;
-  glow.style.top = `${mouseY}px`;
-});
+//   glow.style.left = `${mouseX}px`;
+//   glow.style.top = `${mouseY}px`;
+// });
 
 
 // const cardContainer = document.querySelector('.wrapper');

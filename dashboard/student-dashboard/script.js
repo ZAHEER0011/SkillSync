@@ -25,6 +25,15 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
 
+document.addEventListener("DOMContentLoaded", () => {
+  const body = document.querySelector("body");
+
+  // Add the 'show' class to trigger the animation
+  setTimeout(() => {
+    body.classList.add("show");
+  }, 200); // Delay to make the animation smooth
+});
+
 // Get elements
 const modal = document.getElementById("userDetailsModal");
 const usernameTrigger = document.getElementById("usernameTrigger");
@@ -35,6 +44,7 @@ const overlay = document.querySelector(".overlay");
 function openModal() {
   modal.classList.add("active");
   overlay.classList.add("overlayactive");
+  overlay.style.display = "block"
 }
 
 // Function to close the modal
