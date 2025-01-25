@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <header class="nav-bar">
+          <div class="left">
+            <a href="" class="logo">
+              <img src="../../image/logo.png" alt="logo" />
+              <span class="logo-text">SkillSync</span>
+            </a>
+          </div>
+          <div class="right">
+            <h3 class="quiz-timer">30:00</h3> <!-- Timer placeholder -->
+          </div>
+        </header>
+      </div>
+
+      <div id="quiz-container">
+        <h1 id="quiz-title">Quiz Title</h1> <!-- Quiz title placeholder -->
+        <div id="questions-container">
+          <!-- Questions will be dynamically inserted here -->
+        </div>
+        <div class="quiz-navigation">
+          <button id="prev-question" class="quiz-button">Previous</button>
+          <button id="next-question" class="quiz-button">Next</button>
+        </div>
+        <div class="quiz-submit-section">
+          <button id="submit-quiz" class="button-35 submit-button">Submit Quiz</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+    <script src="quiz.js"></script>
+  </body>
+</html>

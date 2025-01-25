@@ -721,9 +721,9 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  border: 1px solid #301e58bd;
   border-radius: 0.2rem;
-  background-color: #a727c06c;
+  background: rgba(20, 20, 20, 0.6); /* Transparent black background */
+  border: 1px solid rgba(36, 36, 36, 0.685);
   backdrop-filter: blur(10px);
   position: relative;
   /* z-index: 100; */
@@ -853,14 +853,16 @@ body {
   border: none;
   cursor: pointer;
   border-radius: 0.175rem;
-  background-color: var(--primary-color);
+  background-color: rgba(176, 0, 83);
+  border: 3px solid rgba(176, 0, 83);
   color: var(--background-color);
-  transform: all 0.1s;
+  transition: all 0.4s;
   font-size: 1rem;
   font-weight: 600;
 }
 .login-modal-button:hover {
-  background-color: #5254f8;
+  background-color: transparent;
+  border: 3px solid rgba(176, 0, 83);
 }
 .overlay {
   position: fixed;
