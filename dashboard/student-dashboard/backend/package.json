@@ -9,7 +9,7 @@
   "author": "Evgeny Bazhanov",
   "license": "MIT",
   "scripts": {
-    "format": "prettier --write ."
+    "start": "node dashboard/student-dashboard/backend/server.js"
   },
   "devDependencies": {
     "husky": "^9.1.7",

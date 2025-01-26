@@ -2,10 +2,10 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; // Use Render's PORT or default to 3000
 
 // Load the quizzes JSON file
-const quizzes = JSON.parse(fs.readFileSync(path.join(__dirname, 'quizzes.json'), 'utf-8'));
+const quizzes = JSON.parse(fs.readFileSync(path.join(__dirname, 'backend', 'quizzes.json'), 'utf-8'));
 
 // API endpoint to fetch questions by skill
 app.get('/api/questions/:skill', (req, res) => {
@@ -24,4 +24,3 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
-//Lmao
