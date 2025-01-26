@@ -41,7 +41,7 @@ body {
   filter: blur(0px);
 } */
 .announcement{
-  z-index: 1000;
+  z-index: 2000;
   backdrop-filter: blur(10px);
   z-index: 1;
   background: rgba(20, 20, 20, 0.6); /* Transparent black background */
@@ -384,4 +384,5 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1rem;
+  z-index: 0;
 }
