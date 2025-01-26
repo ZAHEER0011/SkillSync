@@ -1,30 +1,12 @@
 {
-  "name": "linkedin-quiz-skill-assessments",
-  "version": "2.0.0",
-  "main": "index.cjs",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Ebazhanov/linkedin-quiz-skill-assessments.git"
-  },
-  "author": "Evgeny Bazhanov",
-  "license": "MIT",
+  "name": "skillsync",
+  "version": "1.0.0",
+  "description": "SkillSync Backend and Frontend",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "node dashboard/student-dashboard/backend/server.js"
+    "start": "node backend/server.js"
   },
-  "devDependencies": {
-    "husky": "^9.1.7",
-    "lint-staged": "^15.4.3",
-    "prettier": "^2.8.8"
-  },
-  "description": "❗As of December 2023 skills assessments are no longer available on LinkedIn, but you can still master your knowledge here❗",
-  "keywords": [],
-  "bugs": {
-    "url": "https://github.com/Ebazhanov/linkedin-quiz-skill-assessments/issues"
-  },
-  "homepage": "https://github.com/Ebazhanov/linkedin-quiz-skill-assessments#readme",
   "dependencies": {
-    "express": "^4.21.2",
-    "markdown-to-json": "^0.5.4",
-    "marked": "^15.0.6"
+    "express": "^4.18.2"
   }
 }
