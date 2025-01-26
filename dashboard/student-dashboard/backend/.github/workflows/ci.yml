@@ -1,0 +1,36 @@
+name: Prettier Code Formatter
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Prettier
+        id: prettier
+        run: |
+          git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
+          npx prettier --write .
+
+      - name: Commit and push changes
+        if: steps.prettier.outputs.changes == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Prettified Code!"
+          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main

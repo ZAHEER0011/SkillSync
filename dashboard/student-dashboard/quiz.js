@@ -19,37 +19,23 @@ document.addEventListener("DOMContentLoaded", function () {
   // Set quiz title
   quizTitle.textContent = `${skill} - ${difficulty} Level Quiz`;
 
-  // Fetch questions from OpenTriviaDB
+  // Fetch questions from your local backend
   async function fetchQuestions() {
-    const categoryMap = {
-      HTML: 18,
-      CSS: 18,
-      JavaScript: 18,
-      "Vue.js": 18,
-      Angular: 18,
-      "Node.js": 18,
-      "Express.js": 18,
-    };
-  
-    const categoryId = categoryMap[skill];
-    if (!categoryId) {
-      console.error(`Invalid skill: ${skill}. No category ID found.`);
-      return [];
-    }
-  
-    const apiUrl = `https://opentdb.com/api.php?amount=10&category=${categoryId}&difficulty=${difficulty.toLowerCase()}&type=multiple`;
-  
+    const apiUrl = `http://localhost:3000/api/questions/${skill}`;
+
     console.log("Fetching questions from:", apiUrl); // Debug: Log the API URL
-  
+
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
       console.log("API Response:", data); // Debug: Log the API response
-  
-      if (data.response_code === 0 && data.results) {
-        return data.results; // Return quizzes if available
+
+      if (Array.isArray(data) && data.length > 0) {
+        // Filter questions by difficulty (if needed)
+        const filteredQuestions = data.filter(question => question.difficulty === difficulty.toLowerCase());
+        return filteredQuestions; // Return filtered questions
       } else {
-        console.error("No quizzes found or API error:", data);
+        console.error("No questions found or API error:", data);
         return [];
       }
     } catch (error) {
@@ -65,15 +51,13 @@ document.addEventListener("DOMContentLoaded", function () {
     questionElement.innerHTML = `
         <h3>Question ${index + 1}: ${question.question}</h3>
         <ul>
-          ${question.incorrect_answers
-            .concat(question.correct_answer)
-            .sort(() => Math.random() - 0.5)
+          ${question.options
             .map(
-              (answer) => `
+              (option) => `
             <li>
               <label>
-                <input type="radio" name="question${index}" value="${answer}">
-                ${answer}
+                <input type="radio" name="question${index}" value="${option}">
+                ${option}
               </label>
             </li>
           `
@@ -133,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const selectedAnswer = document.querySelector(
         `input[name="question${index}"]:checked`
       );
-      if (selectedAnswer && selectedAnswer.value === question.correct_answer) {
+      if (selectedAnswer && selectedAnswer.value === question.correctAnswer) {
         score++;
       }
     });

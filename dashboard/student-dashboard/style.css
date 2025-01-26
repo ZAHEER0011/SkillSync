@@ -386,3 +386,46 @@ body {
   gap: 1rem;
   z-index: 0;
 }
+/* Placeholder card styles */
+.placeholder-card {
+  background-color: #333;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  width: 200px;
+  height: 150px;
+  display: inline-block;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.placeholder-title,
+.placeholder-level,
+.placeholder-button {
+  background-color: #444;
+  border-radius: 4px;
+  height: 20px;
+  margin: 10px 0;
+}
+
+.placeholder-title {
+  width: 60%;
+}
+
+.placeholder-level {
+  width: 40%;
+}
+
+.placeholder-button {
+  width: 80%;
+  height: 30px;
+}
+
+/* Shimmer effect for loading */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}

@@ -176,52 +176,71 @@ async function renderAssessmentCards(interestedSkills) {
     console.error("Assessment cards container not found.");
     return;
   }
-  container.innerHTML = ""; // Clear existing cards
+  
+  // Step 1: Immediately add placeholder cards to the container
+  addPlaceholderCards(container, 4);
 
-  // Fetch all quizzes asynchronously
-  const quizPromises = [];
+  const quizPromises = []; // Array to store promises
+  const quizData = []; // Array to store fetched quizzes and their metadata
+
+  // Fetch quizzes for all skills and difficulties
   for (const skill of Object.keys(interestedSkills)) {
     const difficulties = ["Easy", "Medium", "Hard"];
     for (const difficulty of difficulties) {
-      quizPromises.push(fetchQuizzes(skill, difficulty));
+      quizPromises.push(
+        fetchQuizzes(skill, difficulty).then((quizzes) => {
+          if (quizzes && quizzes.length > 0) {
+            quizData.push({ skill, difficulty, quizzes });
+          }
+        })
+      );
     }
   }
 
-  // Wait for all quizzes to be fetched
-  const quizResults = await Promise.all(quizPromises);
+  // Wait for all fetch calls to complete
+  await Promise.all(quizPromises);
 
-  // Render all cards at once
-  let quizIndex = 0;
-  for (const skill of Object.keys(interestedSkills)) {
-    const difficulties = ["Easy", "Medium", "Hard"];
-    for (const difficulty of difficulties) {
-      const quizzes = quizResults[quizIndex++];
+  // Step 2: Clear the placeholders and render fetched data
+  container.innerHTML = "";
 
-      if (quizzes && quizzes.length > 0) {
-        const card = document.createElement("div");
-        card.className = "card quiz-card";
+  // Step 3: Render cards for quizzes with data
+  quizData.forEach(({ skill, difficulty }) => {
+    const card = document.createElement("div");
+    card.className = "card quiz-card";
+    card.innerHTML = `<div class="quiz-box">
+                        <h1>${skill}</h1>
+                        <p>${difficulty} Level</p>
+                        <p class="quiz-description">Test your knowledge of ${skill} at the ${difficulty.toLowerCase()} level.</p>
+                        <button class="button-35" role="button">Start Assessment</button>
+                      </div>`;
+    container.appendChild(card);
+  });
 
-        const cardContent = `
-          <div class="quiz-box">
-            <h1>${skill}</h1>
-            <p>${difficulty} Level</p>
-            <p class="quiz-description">Test your knowledge of ${skill} at the ${difficulty.toLowerCase()} level.</p>
-            <button class="button-35" role="button">Start Assessment</button>
-          </div>
-        `;
-
-        card.innerHTML = cardContent;
-        container.appendChild(card);
-      } else {
-        console.log(`No quizzes found for ${skill} (${difficulty} level).`);
-        // Optionally, display a message to the user
-        // const noQuizMessage = document.createElement("p");
-        // noQuizMessage.innerText = `No quizzes available for ${skill} (${difficulty} level).`;
-        // container.appendChild(noQuizMessage);
-      }
-    }
+  // If no quizzes were found, show a fallback message
+  if (quizData.length === 0) {
+    container.innerHTML = `<p class="no-quizzes-message">No quizzes are currently available for your selected skills.</p>`;
   }
 }
+
+// Helper function to add placeholder cards instantly
+function addPlaceholderCards(container, count) {
+  container.innerHTML = ""; // Clear any existing content first
+  for (let i = 0; i < count; i++) {
+    const placeholder = document.createElement("div");
+    placeholder.className = "card placeholder-card";
+    placeholder.innerHTML = `<div class="quiz-box">
+                               <div class="placeholder-title"></div>
+                               <div class="placeholder-level"></div>
+                               <div class="placeholder-button"></div>
+                             </div>`;
+    container.appendChild(placeholder);
+  }
+}
+
+
+
+
+
 
 // let sessionToken = null;
 
@@ -232,12 +251,11 @@ async function renderAssessmentCards(interestedSkills) {
 //   return data.token;
 // }
 
-async function fetchQuizzes(tag, difficulty) {
-  const apiDifficulty = difficulty.toLowerCase();
-
-  const apiUrl = `https://quizapi.io/api/v1/questions?apiKey=${QUIZAPI_KEY}&tags=${tag}&difficulty=${apiDifficulty}&limit=40`;
+async function fetchQuizzes(skill, difficulty) {
+  const apiUrl = `http://localhost:3000/api/questions/${skill}`;
 
   console.log("Fetching quizzes from:", apiUrl); // Debug: Log the API URL
+
 
   try {
     const response = await fetch(apiUrl);
@@ -245,7 +263,9 @@ async function fetchQuizzes(tag, difficulty) {
     console.log("API Response:", data); // Debug: Log the API response
 
     if (Array.isArray(data) && data.length > 0) {
-      return data; // Return quizzes if available
+      // Filter quizzes by difficulty (if needed)
+      const filteredQuizzes = data.filter(quiz => quiz.difficulty === difficulty.toLowerCase());
+      return filteredQuizzes; // Return filtered quizzes
     } else {
       console.error("No quizzes found or API error:", data);
       return null;
@@ -269,9 +289,16 @@ document.addEventListener("click", (event) => {
 });
 
 function startAssessment(skill, difficulty) {
-  // Remove spaces and convert to lowercase
-  const formattedDifficulty = difficulty.split(" ")[0].toLowerCase();
+  // Fetch quizzes for the selected skill and difficulty
+  fetchQuizzes(skill, difficulty).then(quizzes => {
+    if (quizzes && quizzes.length > 0) {
+      // Store quizzes in localStorage
+      localStorage.setItem("currentQuiz", JSON.stringify(quizzes));
 
-  // Redirect to quiz.html with query parameters
-  window.location.href = `quiz.html?skill=${encodeURIComponent(skill)}&difficulty=${encodeURIComponent(formattedDifficulty)}`;
+      // Redirect to quiz.html
+      window.location.href = `quiz.html?skill=${encodeURIComponent(skill)}&difficulty=${encodeURIComponent(difficulty)}`;
+    } else {
+      alert("No quizzes available for the selected skill and difficulty.");
+    }
+  });
 }
