@@ -148,8 +148,8 @@ document.addEventListener("DOMContentLoaded", () => {
           updateElementText(".username-section p", userData.username || "User");
 
           // Render assessment cards
-          if (userData.interestedFields && userData.interestedSkills) {
-            await renderAssessmentCards(userData);
+          if (userData.interestedSkills) {
+            await renderAssessmentCards(userData.interestedSkills);
           }
         } else {
           console.error("No user document found.");
@@ -170,7 +170,7 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function renderAssessmentCards(userData) {
+async function renderAssessmentCards(interestedSkills) {
   const container = document.getElementById("assessment-cards-container");
   if (!container) {
     console.error("Assessment cards container not found.");
@@ -178,19 +178,12 @@ async function renderAssessmentCards(userData) {
   }
   container.innerHTML = ""; // Clear existing cards
 
-  // Fetch interestedFields and interestedSkills from Firestore
-  const interestedFields = userData.interestedFields;
-  const interestedSkills = userData.interestedSkills;
-
   // Fetch all quizzes asynchronously
   const quizPromises = [];
-  for (const field of interestedFields) {
-    const skills = interestedSkills[field] || [];
-    for (const skill of Object.keys(skills)) {
-      const difficulties = ["Easy", "Medium", "Hard"];
-      for (const difficulty of difficulties) {
-        quizPromises.push(fetchQuizzes(skill, field, difficulty));
-      }
+  for (const skill of Object.keys(interestedSkills)) {
+    const difficulties = ["Easy", "Medium", "Hard"];
+    for (const difficulty of difficulties) {
+      quizPromises.push(fetchQuizzes(skill, difficulty));
     }
   }
 
@@ -199,35 +192,32 @@ async function renderAssessmentCards(userData) {
 
   // Render all cards at once
   let quizIndex = 0;
-  for (const field of interestedFields) {
-    const skills = interestedSkills[field] || [];
-    for (const skill of Object.keys(skills)) {
-      const difficulties = ["Easy", "Medium", "Hard"];
-      for (const difficulty of difficulties) {
-        const quizzes = quizResults[quizIndex++];
+  for (const skill of Object.keys(interestedSkills)) {
+    const difficulties = ["Easy", "Medium", "Hard"];
+    for (const difficulty of difficulties) {
+      const quizzes = quizResults[quizIndex++];
 
-        if (quizzes && quizzes.length > 0) {
-          const card = document.createElement("div");
-          card.className = "card quiz-card";
+      if (quizzes && quizzes.length > 0) {
+        const card = document.createElement("div");
+        card.className = "card quiz-card";
 
-          const cardContent = `
-            <div class="quiz-box">
-              <h1>${skill}</h1>
-              <p>${difficulty} Level</p>
-              <p class="quiz-description">Test your knowledge of ${skill} at the ${difficulty.toLowerCase()} level.</p>
-              <button class="button-35" role="button">Start Assessment</button>
-            </div>
-          `;
+        const cardContent = `
+          <div class="quiz-box">
+            <h1>${skill}</h1>
+            <p>${difficulty} Level</p>
+            <p class="quiz-description">Test your knowledge of ${skill} at the ${difficulty.toLowerCase()} level.</p>
+            <button class="button-35" role="button">Start Assessment</button>
+          </div>
+        `;
 
-          card.innerHTML = cardContent;
-          container.appendChild(card);
-        } else {
-          console.log(`No quizzes found for ${skill} (${difficulty} level).`);
-          // Optionally, display a message to the user
-          const noQuizMessage = document.createElement("p");
-          noQuizMessage.innerText = `No quizzes available for ${skill} (${difficulty} level).`;
-          container.appendChild(noQuizMessage);
-        }
+        card.innerHTML = cardContent;
+        container.appendChild(card);
+      } else {
+        console.log(`No quizzes found for ${skill} (${difficulty} level).`);
+        // Optionally, display a message to the user
+        // const noQuizMessage = document.createElement("p");
+        // noQuizMessage.innerText = `No quizzes available for ${skill} (${difficulty} level).`;
+        // container.appendChild(noQuizMessage);
       }
     }
   }
@@ -242,11 +232,10 @@ async function renderAssessmentCards(userData) {
 //   return data.token;
 // }
 
-async function fetchQuizzes(skill, field, difficulty) {
+async function fetchQuizzes(tag, difficulty) {
   const apiDifficulty = difficulty.toLowerCase();
 
-  // Use the interestedField as the category
-  const apiUrl = `https://quizapi.io/api/v1/questions?apiKey=${QUIZAPI_KEY}&category=${field}&difficulty=${apiDifficulty}&limit=20`;
+  const apiUrl = `https://quizapi.io/api/v1/questions?apiKey=${QUIZAPI_KEY}&tags=${tag}&difficulty=${apiDifficulty}&limit=40`;
 
   console.log("Fetching quizzes from:", apiUrl); // Debug: Log the API URL
 
@@ -256,14 +245,7 @@ async function fetchQuizzes(skill, field, difficulty) {
     console.log("API Response:", data); // Debug: Log the API response
 
     if (Array.isArray(data) && data.length > 0) {
-      // Filter questions by skill name
-      const filteredQuestions = data.filter((question) =>
-        question.question.toLowerCase().includes(skill.toLowerCase())
-      );
-
-      console.log("Filtered questions:", filteredQuestions); // Debug: Log filtered questions
-
-      return filteredQuestions.slice(0, 10); // Return up to 10 filtered questions
+      return data; // Return quizzes if available
     } else {
       console.error("No quizzes found or API error:", data);
       return null;
@@ -291,5 +273,5 @@ function startAssessment(skill, difficulty) {
   const formattedDifficulty = difficulty.split(" ")[0].toLowerCase();
 
   // Redirect to quiz.html with query parameters
-  window.location.href = `quiz.html?skill=${encodeURIComponent(skill)}&difficulty=${encodeURIComponent(formattedDifficulty)}&field=${encodeURIComponent(field)}`;
+  window.location.href = `quiz.html?skill=${encodeURIComponent(skill)}&difficulty=${encodeURIComponent(formattedDifficulty)}`;
 }

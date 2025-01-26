@@ -44,3 +44,24 @@ body {
   /* padding: 0.2rem; */
   overflow-x: hidden;
 }
+.announcement{
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  z-index: 1;
+  background: rgba(20, 20, 20, 0.6); /* Transparent black background */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  width: 1080px;
+  text-align: center;
+  padding: 4rem;
+}
