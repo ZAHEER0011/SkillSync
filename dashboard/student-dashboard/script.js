@@ -252,7 +252,7 @@ function addPlaceholderCards(container, count) {
 // }
 
 async function fetchQuizzes(skill, difficulty) {
-  const apiUrl = `http://localhost:3000/api/questions/${skill}`;
+  const apiUrl = `https://skillsync-backend-1-s85m.onrender.com/api/questions/${skill}`;
 
   console.log("Fetching quizzes from:", apiUrl); // Debug: Log the API URL
 
