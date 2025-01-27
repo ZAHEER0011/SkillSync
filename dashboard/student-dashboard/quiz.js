@@ -11,39 +11,52 @@ document.addEventListener("DOMContentLoaded", function () {
   let timeLeft = 30 * 60; // 30 minutes in seconds
   let questions = []; // Store fetched questions
 
-  // Fetch query parameters (skill and difficulty)
+  // Fetch query parameters (skill)
   const urlParams = new URLSearchParams(window.location.search);
   const skill = urlParams.get("skill");
-  const difficulty = urlParams.get("difficulty");
 
   // Set quiz title
-  quizTitle.textContent = `${skill} - ${difficulty} Level Quiz`;
+  quizTitle.textContent = `${skill} Quiz`;
 
-  // Fetch questions from your local backend
-  async function fetchQuestions() {
-    const apiUrl = `http://localhost:3000/api/questions/${skill}`;
-
-    console.log("Fetching questions from:", apiUrl); // Debug: Log the API URL
-
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      console.log("API Response:", data); // Debug: Log the API response
-
-      if (Array.isArray(data) && data.length > 0) {
-        // Filter questions by difficulty (if needed)
-        const filteredQuestions = data.filter(question => question.difficulty === difficulty.toLowerCase());
-        return filteredQuestions; // Return filtered questions
-      } else {
-        console.error("No questions found or API error:", data);
-        return [];
-      }
-    } catch (error) {
-      console.error("Error fetching questions:", error);
-      return [];
+  // Function to shuffle an array
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
+    return array;
   }
 
+// Clean question text to remove "Q${number}." prefix
+function cleanQuestionText(question) {
+  return question.replace(/^Q\d+\.\s*/, "").trim(); // Removes "Q1. ", "Q2. ", etc.
+}
+
+// Fetch and process questions
+async function fetchQuestions() {
+  const apiUrl = `https://skillsync-backend-1-s85m.onrender.com/api/questions/${skill.toLowerCase()}`;
+
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    if (Array.isArray(data) && data.length > 0) {
+      // Shuffle, slice to get 40 questions, and clean question text
+      return shuffleArray(data)
+        .slice(0, 40)
+        .map((q) => ({
+          ...q,
+          question: cleanQuestionText(q.question), // Clean the question text
+        }));
+    } else {
+      console.error("No questions found or API error:", data);
+      return [];
+    }
+  } catch (error) {
+    console.error("Error fetching questions:", error);
+    return [];
+  }
+}
   // Render a single question
   function renderQuestion(question, index) {
     const questionElement = document.createElement("div");
@@ -90,6 +103,10 @@ document.addEventListener("DOMContentLoaded", function () {
     questions.forEach((question, i) => {
       question.style.display = i === index ? "block" : "none";
     });
+
+    // Handle navigation button visibility
+    prevButton.style.display = index === 0 ? "none" : "inline-block";
+    nextButton.style.display = index === questions.length - 1 ? "none" : "inline-block";
   }
 
   // Timer functionality
@@ -132,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
     alert(`Your score: ${score}/${questions.length}`);
 
     // Redirect to dashboard or show results
-    window.location.href = "dashboard.html";
+    window.location.href = "../student-dashboard/index.html";
   }
 
   // Event listeners

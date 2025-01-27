@@ -1,3 +1,4 @@
+// Updated script.js for SkillSync Student Dashboard
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import {
   getAuth,
@@ -24,7 +25,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
-const QUIZAPI_KEY = "DmwyAl55lMloRgNE70Rf57FYFfErnCQeVLwKq3TX"; 
 
 // Wait for the DOM to load
 document.addEventListener("DOMContentLoaded", () => {
@@ -35,53 +35,16 @@ document.addEventListener("DOMContentLoaded", () => {
     body.classList.add("show");
   }, 200); // Delay to make the animation smooth
 
-  // Get elements
-  const modal = document.getElementById("userDetailsModal");
-  const usernameTrigger = document.getElementById("usernameTrigger");
-  const profileTrigger = document.getElementById("profileTrigger");
-  const closeIcon = document.querySelector(".cross-image img");
-  const overlay = document.querySelector(".overlay");
   const logoutButton = document.querySelector(".logout-button");
-  
-
-  // Function to open the modal
-  function openModal() {
-    modal.classList.add("active");
-    overlay.classList.add("overlayactive");
-    overlay.style.display = "block";
-  }
-
-  // Function to close the modal
-  function closeModal() {
-    modal.classList.remove("active");
-    overlay.classList.remove("overlayactive");
-  }
-
-  // Open modal when clicking on username or profile icon
-  if (usernameTrigger) usernameTrigger.addEventListener("click", openModal);
-  if (profileTrigger) profileTrigger.addEventListener("click", openModal);
-
-  // Close modal when clicking on the close icon
-  if (closeIcon) closeIcon.addEventListener("click", closeModal);
-  if (overlay) overlay.addEventListener("click", closeModal);
-
-  // Close modal when clicking outside the modal content
-  window.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      closeModal();
-    }
-  });
 
   // Logout button logic
   if (logoutButton) {
     logoutButton.addEventListener("click", (event) => {
-      event.preventDefault(); // Prevent the default link behavior
-
+      event.preventDefault();
       signOut(auth)
         .then(() => {
           console.log("User successfully logged out.");
-          // Redirect to the landing page or login page
-          window.location.href = "../../index.html"; // Replace with the actual landing page URL
+          window.location.href = "../../index.html"; // Redirect to landing page
         })
         .catch((error) => {
           console.error("Error during logout:", error);
@@ -94,58 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
-        // Reference the user document
         const userDocRef = doc(db, "Users", user.uid);
-
-        // Fetch the user document
         const userDoc = await getDoc(userDocRef);
 
         if (userDoc.exists()) {
-          // Extract user data
           const userData = userDoc.data();
-
-          // Dynamically update the HTML with user details
-          const updateElementText = (selector, text) => {
-            const element = document.querySelector(selector);
-            if (element) element.innerText = text || "N/A";
-          };
-
-          updateElementText(
-            ".fullname-section p:nth-child(2)",
-            userData.username
-          );
-          updateElementText(".bio-section p:nth-child(2)", userData.bio);
-          updateElementText(".email-section p:nth-child(2)", user.email);
-          updateElementText(".role-section p:nth-child(2)", userData.role);
-          updateElementText(".age-section p:nth-child(2)", userData.age);
-          updateElementText(
-            ".dob-section p:nth-child(2)",
-            userData.dateOfBirth
-          );
-          updateElementText(".gender-section p:nth-child(2)", userData.gender);
-          updateElementText(
-            ".experience-section p:nth-child(2)",
-            userData.industryExperience
-          );
-          updateElementText(
-            ".portfolio-section p:nth-child(2)",
-            userData.portfolio
-          );
-          updateElementText(
-            ".interested-fields-section p:nth-child(2)",
-            Array.isArray(userData.interestedFields)
-              ? `[${userData.interestedFields.join(", ")}]`
-              : userData.interestedFields
-          );
-          updateElementText(
-            ".interested-skills-section p:nth-child(2)",
-            userData.interestedSkills
-              ? `[${Object.keys(userData.interestedSkills).join(", ")}]`
-              : "N/A"
-          );
-
-          // Update username in the top-left corner
-          updateElementText(".username-section p", userData.username || "User");
 
           // Render assessment cards
           if (userData.interestedSkills) {
@@ -176,98 +92,59 @@ async function renderAssessmentCards(interestedSkills) {
     console.error("Assessment cards container not found.");
     return;
   }
-  
-  // Step 1: Immediately add placeholder cards to the container
+
+  // Add placeholder cards
   addPlaceholderCards(container, 4);
 
-  const quizPromises = []; // Array to store promises
-  const quizData = []; // Array to store fetched quizzes and their metadata
+  const quizPromises = [];
+  const quizData = [];
 
-  // Fetch quizzes for all skills and difficulties
+  // Fetch quizzes for each skill
   for (const skill of Object.keys(interestedSkills)) {
-    const difficulties = ["Easy", "Medium", "Hard"];
-    for (const difficulty of difficulties) {
-      quizPromises.push(
-        fetchQuizzes(skill, difficulty).then((quizzes) => {
-          if (quizzes && quizzes.length > 0) {
-            quizData.push({ skill, difficulty, quizzes });
-          }
-        })
-      );
-    }
+    quizPromises.push(
+      fetchQuizzes(skill).then((quizzes) => {
+        if (quizzes) {
+          quizData.push({ skill, quizzes });
+        }
+      })
+    );
   }
 
-  // Wait for all fetch calls to complete
+  // Wait for all fetches to complete
   await Promise.all(quizPromises);
 
-  // Step 2: Clear the placeholders and render fetched data
+  // Clear placeholders and render the actual cards
   container.innerHTML = "";
-
-  // Step 3: Render cards for quizzes with data
-  quizData.forEach(({ skill, difficulty }) => {
+  quizData.forEach(({ skill, quizzes }) => {
     const card = document.createElement("div");
     card.className = "card quiz-card";
     card.innerHTML = `<div class="quiz-box">
                         <h1>${skill}</h1>
-                        <p>${difficulty} Level</p>
-                        <p class="quiz-description">Test your knowledge of ${skill} at the ${difficulty.toLowerCase()} level.</p>
+                        <p>40 Questions</p>
+                        <p class="quiz-description">Test your knowledge of ${skill} with 40 engaging questions.</p>
                         <button class="button-35" role="button">Start Assessment</button>
                       </div>`;
     container.appendChild(card);
   });
 
-  // If no quizzes were found, show a fallback message
+  // Show a fallback message if no quizzes are found
   if (quizData.length === 0) {
     container.innerHTML = `<p class="no-quizzes-message">No quizzes are currently available for your selected skills.</p>`;
   }
 }
 
-// Helper function to add placeholder cards instantly
-function addPlaceholderCards(container, count) {
-  container.innerHTML = ""; // Clear any existing content first
-  for (let i = 0; i < count; i++) {
-    const placeholder = document.createElement("div");
-    placeholder.className = "card placeholder-card";
-    placeholder.innerHTML = `<div class="quiz-box">
-                               <div class="placeholder-title"></div>
-                               <div class="placeholder-level"></div>
-                               <div class="placeholder-button"></div>
-                             </div>`;
-    container.appendChild(placeholder);
-  }
-}
-
-
-
-
-
-
-// let sessionToken = null;
-
-// async function getSessionToken() {
-//   const tokenUrl = "https://opentdb.com/api_token.php?command=request";
-//   const response = await fetch(tokenUrl);
-//   const data = await response.json();
-//   return data.token;
-// }
-
-async function fetchQuizzes(skill, difficulty) {
-  const apiUrl = `https://skillsync-backend-1-s85m.onrender.com/api/questions/${skill}`;
-
-  console.log("Fetching quizzes from:", apiUrl); // Debug: Log the API URL
-
+// Fetch quizzes for a skill
+async function fetchQuizzes(skill) {
+  const apiUrl = `https://skillsync-backend-1-s85m.onrender.com/api/questions/${skill.toLowerCase()}`;
 
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
-    console.log("API Response:", data); // Debug: Log the API response
 
     if (Array.isArray(data) && data.length > 0) {
-      // Filter quizzes by difficulty (if needed)
-      const filteredQuizzes = data.filter(quiz => quiz.difficulty === difficulty.toLowerCase());
-      return filteredQuizzes; // Return filtered quizzes
+      return data.slice(0, 40); // Return the first 40 questions
     } else {
-      console.error("No quizzes found or API error:", data);
+      console.error(`No quizzes found for ${skill}:`, data);
       return null;
     }
   } catch (error) {
@@ -275,30 +152,40 @@ async function fetchQuizzes(skill, difficulty) {
     return null;
   }
 }
+
+// Add placeholder cards
+function addPlaceholderCards(container, count) {
+  container.innerHTML = "";
+  for (let i = 0; i < count; i++) {
+    const placeholder = document.createElement("div");
+    placeholder.className = "card placeholder-card";
+    placeholder.innerHTML = `<div class="quiz-box">
+                               <div class="placeholder-title"></div>
+                               <div class="placeholder-questions"></div>
+                               <div class="placeholder-button"></div>
+                             </div>`;
+    container.appendChild(placeholder);
+  }
+}
+
 // Handle "Start Assessment" button clicks
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("button-35")) {
     const skill = event.target
       .closest(".quiz-box")
       .querySelector("h1").innerText;
-    const difficulty = event.target
-      .closest(".quiz-box")
-      .querySelector("p").innerText;
-    startAssessment(skill, difficulty);
+    startAssessment(skill);
   }
 });
 
-function startAssessment(skill, difficulty) {
-  // Fetch quizzes for the selected skill and difficulty
-  fetchQuizzes(skill, difficulty).then(quizzes => {
+// Redirect to quiz page
+function startAssessment(skill) {
+  fetchQuizzes(skill).then((quizzes) => {
     if (quizzes && quizzes.length > 0) {
-      // Store quizzes in localStorage
       localStorage.setItem("currentQuiz", JSON.stringify(quizzes));
-
-      // Redirect to quiz.html
-      window.location.href = `quiz.html?skill=${encodeURIComponent(skill)}&difficulty=${encodeURIComponent(difficulty)}`;
+      window.location.href = `quiz.html?skill=${encodeURIComponent(skill)}`;
     } else {
-      alert("No quizzes available for the selected skill and difficulty.");
+      alert("No quizzes available for the selected skill.");
     }
   });
 }
