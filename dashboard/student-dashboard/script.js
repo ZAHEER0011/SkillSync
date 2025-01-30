@@ -1,4 +1,3 @@
-// Updated script.js for SkillSync Student Dashboard
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import {
   getAuth,
@@ -25,6 +24,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
+const QUIZAPI_KEY = "DmwyAl55lMloRgNE70Rf57FYFfErnCQeVLwKq3TX"; 
 
 // Wait for the DOM to load
 document.addEventListener("DOMContentLoaded", () => {
@@ -35,16 +35,53 @@ document.addEventListener("DOMContentLoaded", () => {
     body.classList.add("show");
   }, 200); // Delay to make the animation smooth
 
+  // Get elements
+  const modal = document.getElementById("userDetailsModal");
+  const usernameTrigger = document.getElementById("usernameTrigger");
+  const profileTrigger = document.getElementById("profileTrigger");
+  const closeIcon = document.querySelector(".cross-image img");
+  const overlay = document.querySelector(".overlay");
   const logoutButton = document.querySelector(".logout-button");
+  
+
+  // Function to open the modal
+  function openModal() {
+    modal.classList.add("active");
+    overlay.classList.add("overlayactive");
+    overlay.style.display = "block";
+  }
+
+  // Function to close the modal
+  function closeModal() {
+    modal.classList.remove("active");
+    overlay.classList.remove("overlayactive");
+  }
+
+  // Open modal when clicking on username or profile icon
+  if (usernameTrigger) usernameTrigger.addEventListener("click", openModal);
+  if (profileTrigger) profileTrigger.addEventListener("click", openModal);
+
+  // Close modal when clicking on the close icon
+  if (closeIcon) closeIcon.addEventListener("click", closeModal);
+  if (overlay) overlay.addEventListener("click", closeModal);
+
+  // Close modal when clicking outside the modal content
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
 
   // Logout button logic
   if (logoutButton) {
     logoutButton.addEventListener("click", (event) => {
-      event.preventDefault();
+      event.preventDefault(); // Prevent the default link behavior
+
       signOut(auth)
         .then(() => {
           console.log("User successfully logged out.");
-          window.location.href = "../../index.html"; // Redirect to landing page
+          // Redirect to the landing page or login page
+          window.location.href = "../../index.html"; // Replace with the actual landing page URL
         })
         .catch((error) => {
           console.error("Error during logout:", error);
@@ -57,11 +94,58 @@ document.addEventListener("DOMContentLoaded", () => {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
+        // Reference the user document
         const userDocRef = doc(db, "Users", user.uid);
+
+        // Fetch the user document
         const userDoc = await getDoc(userDocRef);
 
         if (userDoc.exists()) {
+          // Extract user data
           const userData = userDoc.data();
+
+          // Dynamically update the HTML with user details
+          const updateElementText = (selector, text) => {
+            const element = document.querySelector(selector);
+            if (element) element.innerText = text || "N/A";
+          };
+
+          updateElementText(
+            ".fullname-section p:nth-child(2)",
+            userData.username
+          );
+          updateElementText(".bio-section p:nth-child(2)", userData.bio);
+          updateElementText(".email-section p:nth-child(2)", user.email);
+          updateElementText(".role-section p:nth-child(2)", userData.role);
+          updateElementText(".age-section p:nth-child(2)", userData.age);
+          updateElementText(
+            ".dob-section p:nth-child(2)",
+            userData.dateOfBirth
+          );
+          updateElementText(".gender-section p:nth-child(2)", userData.gender);
+          updateElementText(
+            ".experience-section p:nth-child(2)",
+            userData.industryExperience
+          );
+          updateElementText(
+            ".portfolio-section p:nth-child(2)",
+            userData.portfolio
+          );
+          updateElementText(
+            ".interested-fields-section p:nth-child(2)",
+            Array.isArray(userData.interestedFields)
+              ? `[${userData.interestedFields.join(", ")}]`
+              : userData.interestedFields
+          );
+          updateElementText(
+            ".interested-skills-section p:nth-child(2)",
+            userData.interestedSkills
+              ? `[${Object.keys(userData.interestedSkills).join(", ")}]`
+              : "N/A"
+          );
+
+          // Update username in the top-left corner
+          updateElementText(".username-section p", userData.username || "User");
 
           // Render assessment cards
           if (userData.interestedSkills) {

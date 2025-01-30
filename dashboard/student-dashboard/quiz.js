@@ -57,29 +57,65 @@ async function fetchQuestions() {
     return [];
   }
 }
-  // Render a single question
-  function renderQuestion(question, index) {
-    const questionElement = document.createElement("div");
-    questionElement.className = "question";
-    questionElement.innerHTML = `
-        <h3>Question ${index + 1}: ${question.question}</h3>
-        <ul>
-          ${question.options
-            .map(
-              (option) => `
-            <li>
-              <label>
-                <input type="radio" name="question${index}" value="${option}">
-                ${option}
-              </label>
-            </li>
-          `
-            )
-            .join("")}
-        </ul>
-      `;
-    return questionElement;
-  }
+function renderQuestion(question, index) {
+  const questionElement = document.createElement("div");
+  questionElement.className = "question";
+
+  let htmlContent = `
+    <h3>Question ${index + 1}:</h3>
+    <div class="question-text">${escapeHtml(question.question)}</div>
+  `;
+
+  // Render question options with embedded content
+  htmlContent += `<ul class="question-options">`;
+
+  question.options.forEach((option, i) => {
+    const embeddedContent = question.embeddedContent && question.embeddedContent[i]
+      ? formatEmbeddedContent(question.embeddedContent[i])
+      : "";
+
+
+    htmlContent += `
+      <li class="option-item">
+        ${embeddedContent} 
+        <label>
+          <input type="radio" name="question${index}" value="${escapeHtml(option)}">
+          ${escapeHtml(option)}
+        </label>
+      </li>
+    `;
+  });
+
+  htmlContent += `</ul>`;
+
+  questionElement.innerHTML = htmlContent;
+  return questionElement;
+}
+
+function escapeHtml(text) {
+  // Escape special characters except underscores
+  const map = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  };
+  return text.replace(/[&<>"']/g, (char) => map[char]);
+}
+
+// Function to format bold text
+function formatTextContent(text) {
+  // Replace `**bold**` with HTML bold tags `<strong>`
+  return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+}
+
+// Helper function to format embedded content correctly
+function formatEmbeddedContent(content) {
+  if (!content) return "";
+  return `<pre class="embedded-content">${escapeHtml(content)}</pre>`;
+}
+
 
   // Render all questions
   async function renderQuiz() {

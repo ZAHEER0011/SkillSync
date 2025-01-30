@@ -216,20 +216,20 @@ login.addEventListener("click", function (event) {
     });
 });
 
-// auth.onAuthStateChanged(async (user) => {
-//   if (user) {
-//     const userDocRef = doc(db, "Users", user.uid);
-//     const userDocSnap = await getDoc(userDocRef);
+auth.onAuthStateChanged(async (user) => {
+  if (user) {
+    const userDocRef = doc(db, "Users", user.uid);
+    const userDocSnap = await getDoc(userDocRef);
 
-//     if (userDocSnap.exists()) {
-//       const userRole = userDocSnap.data().role;
+    if (userDocSnap.exists()) {
+      const userRole = userDocSnap.data().role;
 
-//       // Redirect based on role
-//       if (userRole === "Student") {
-//         window.location.href = "./dashboard/student-dashboard/index.html";
-//       } else if (userRole === "Recruiter") {
-//         window.location.href = "./dashboard/recruiter-dashboard/index.html";
-//       }
-//     }
-//   }
-// });
+      // Redirect based on role
+      if (userRole === "Student") {
+        window.location.href = "./dashboard/student-dashboard/index.html";
+      } else if (userRole === "Recruiter") {
+        window.location.href = "./dashboard/recruiter-dashboard/index.html";
+      }
+    }
+  }
+});
