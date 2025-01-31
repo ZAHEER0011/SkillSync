@@ -1,3 +1,32 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import {
+  getFirestore,
+  updateDoc,
+  setDoc,
+  getDoc,
+  doc,
+} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDPWr-6clbipRfvCkty0GF9vj7GhbJhut8",
+  authDomain: "skillsync-a6e61.firebaseapp.com",
+  projectId: "skillsync-a6e61",
+  storageBucket: "skillsync-a6e61.firebasestorage.app",
+  messagingSenderId: "213330406465",
+  appId: "1:213330406465:web:65bb9762130f9d5c68eac0",
+};
+
+//Initialize Firebase
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const db = getFirestore(app);
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const quizTimerElement = document.querySelector(".quiz-timer");
   const questionsContainer = document.getElementById("questions-container");
@@ -163,6 +192,82 @@ function formatEmbeddedContent(content) {
     }, 1000);
   }
 
+  async function initializeSkillSubcategories(userId, skill) {
+    const skillDocRef = doc(db, "Users", userId);
+    try {
+      const docSnap = await getDoc(skillDocRef);
+      
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        
+        if (data.interestedSkills && data.interestedSkills[skill]) {
+          // Update the skill with new subcategories if they don't exist
+          const updateData = {};
+          
+          if (!("timeSpent" in data.interestedSkills[skill])) {
+            updateData[`interestedSkills.${skill}.timeSpent`] = 0;
+          }
+          if (!("bestScore" in data.interestedSkills[skill])) {
+            updateData[`interestedSkills.${skill}.bestScore`] = 0;
+          }
+          if (!("assessmentCompletionRate" in data.interestedSkills[skill])) {
+            updateData[`interestedSkills.${skill}.assessmentCompletionRate`] = 0;
+          }
+          
+          if (Object.keys(updateData).length > 0) {
+            await updateDoc(skillDocRef, updateData);
+            console.log(`New subcategories added for ${skill}`);
+          }
+        } else {
+          console.error("Skill not found for the user.");
+        }
+      } else {
+        console.error("User document does not exist.");
+      }
+    } catch (error) {
+      console.error("Error initializing skill subcategories:", error);
+    }
+  }
+  
+  async function updateAssessmentProgress(userId, skill, score, timeSpent) {
+    const skillDocRef = doc(db, "Users", userId);
+    
+    try {
+      await updateDoc(skillDocRef, {
+        [`interestedSkills.${skill}.assessmentAttempted`]: true,
+        [`interestedSkills.${skill}.assessmentScore`]: score,
+        [`interestedSkills.${skill}.lastAttemptTime`]: new Date(),
+        [`interestedSkills.${skill}.timeSpent`]: timeSpent,
+        [`interestedSkills.${skill}.bestScore`]: Math.max(score, (await getBestScore(userId, skill))),
+      });
+      console.log(`Assessment progress updated for ${skill}`);
+    } catch (error) {
+      console.error("Error updating progress:", error);
+    }
+  }
+  
+  async function getBestScore(userId, skill) {
+    const skillDocRef = doc(db, "Users", userId);
+    const docSnap = await getDoc(skillDocRef);
+  
+    if (docSnap.exists()) {
+      return docSnap.data()?.interestedSkills[skill]?.bestScore || 0;
+    }
+    return 0;
+  }
+
+  function validateAnswers() {
+    for (let i = 0; i < questions.length; i++) {
+      const selectedAnswer = document.querySelector(`input[name="question${i}"]:checked`);
+      if (!selectedAnswer) {
+        alert(`Please answer question ${i + 1}`);
+        return false;
+      }
+    }
+    return true;
+  }
+  
+
   // Calculate score
   function calculateScore() {
     let score = 0;
@@ -177,16 +282,28 @@ function formatEmbeddedContent(content) {
     return score;
   }
 
-  // Submit quiz
   async function submitQuiz() {
     clearInterval(timer);
-
+  
     const score = calculateScore();
     alert(`Your score: ${score}/${questions.length}`);
-
+  
+    const timeSpent = 30 * 60 - timeLeft;
+  
+    try {
+      const userId = auth.currentUser.uid; 
+      if (userId) {
+        await updateAssessmentProgress(userId, skill, score, timeSpent);
+        console.log("Quiz progress saved successfully.");
+      }
+    } catch (error) {
+      console.error("Error saving quiz progress:", error);
+    }
+  
     // Redirect to dashboard or show results
     window.location.href = "../student-dashboard/index.html";
   }
+  
 
   // Event listeners
   prevButton.addEventListener("click", () => {
@@ -204,7 +321,6 @@ function formatEmbeddedContent(content) {
   });
 
   submitButton.addEventListener("click", submitQuiz);
-
   // Initialize quiz
   renderQuiz();
   startTimer();

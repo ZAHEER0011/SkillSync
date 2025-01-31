@@ -149,7 +149,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Render assessment cards
           if (userData.interestedSkills) {
-            await renderAssessmentCards(userData.interestedSkills);
+            renderAssessmentCards(userData.interestedSkills);
+            renderProgressCards(userData.interestedSkills);
           }
         } else {
           console.error("No user document found.");
@@ -214,6 +215,39 @@ async function renderAssessmentCards(interestedSkills) {
   // Show a fallback message if no quizzes are found
   if (quizData.length === 0) {
     container.innerHTML = `<p class="no-quizzes-message">No quizzes are currently available for your selected skills.</p>`;
+  }
+}
+function renderProgressCards(interestedSkills) {
+  const progressContainer = document.getElementById("progress-cards-container");
+  if (!progressContainer) {
+    console.error("Progress cards container not found.");
+    return;
+  }
+
+  progressContainer.innerHTML = "";
+
+  Object.entries(interestedSkills).forEach(([skill, data]) => {
+    const progressCard = document.createElement("div");
+    progressCard.className = "card progress-card";
+    
+    const progress = data.progress || 0;
+    const completedAssessments = data.completedAssessments || 0;
+    const totalAssessments = data.totalAssessments || 0;
+
+    progressCard.innerHTML = `
+      <div class="progress-box">
+        <h1>${skill}</h1>
+        <p>Progress: ${progress}%</p>
+        <p>Assessments Completed: ${completedAssessments}/${totalAssessments}</p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${progress}%;"></div>
+        </div>
+      </div>`;
+    progressContainer.appendChild(progressCard);
+  });
+
+  if (Object.keys(interestedSkills).length === 0) {
+    progressContainer.innerHTML = `<p class="no-progress-message">No skill progress data available.</p>`;
   }
 }
 
