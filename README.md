@@ -1,4 +1,4 @@
-⚡ SkillSync - Skill Assessment & Progress Tracker
+## ⚡ SkillSync - Skill Assessment & Progress Tracker
 
     🚧 Project Status: Incomplete — Built as a hackathon project, but development is ongoing.
 
@@ -22,3 +22,5 @@ Despite not making it in the hackathon, SkillSync was something we truly believe
     🔁 Real-Time Data Sync using Firestore
 
     ✨ Responsive UI for modern, clean, and intuitive navigation
+
+## Live Demo - 
