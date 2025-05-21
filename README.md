@@ -23,4 +23,38 @@ Despite not making it in the hackathon, SkillSync was something we truly believe
 
     ✨ Responsive UI for modern, clean, and intuitive navigation
 
-## Live Demo - 
+## Live Demo - https://zaheer0011.github.io/SkillSync/
+
+🛠️ Tech Stack
+
+| Layer           | Technologies Used                    |
+| --------------- | ------------------------------------ |
+| Frontend        | HTML, CSS, JavaScript                |
+| Backend         | Firebase (Authentication, Firestore) |
+| API Services    | Custom Quiz API integration          |
+| Hosting         | Firebase Hosting (or similar)        |
+| Version Control | Git & GitHub                         |
+
+🧩 What We Learned
+
+Even though the project wasn't completed in the hackathon timeframe:
+
+    We learned how to design scalable systems using Firebase.
+
+    We explored dynamic data fetching with external APIs.
+
+    We built modular, reusable components with clean UI/UX.
+
+Most importantly, we learned that a good idea doesn’t end with a failed deadline — it evolves.
+📌 Upcoming Improvements
+
+    Add quiz timer and scoring logic
+
+    Integrate AI for skill recommendations
+
+    Improve responsiveness and accessibility
+
+    Connect with career/growth APIs for real-world applications
+
+
+💡 SkillSync is built with passion for learners, by learners. Let's bridge the skill gap — one assessment at a time.
